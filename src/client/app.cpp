@@ -25,7 +25,7 @@ SDL_AppResult GameApp::processSDLIterate()
 {
     m_ticker.frameStart();
 
-    renderer().clear();
+    renderer()->beginFrame();
 
     SDL_AppResult result = update(m_ticker.deltaTime());
 
@@ -35,11 +35,9 @@ SDL_AppResult GameApp::processSDLIterate()
 
     inputManager().flush();
 
-    m_renderer.batcher().flushBatch();
+    m_renderer->endFrame();
 
     m_ticker.frameEnd();
-
-    SDL_GL_SwapWindow(m_renderer.window());
 
     return SDL_APP_CONTINUE;
 };
@@ -47,7 +45,7 @@ SDL_AppResult GameApp::processSDLIterate()
 SDL_AppResult GameApp::processSDLEvent(SDL_Event* event)
 {
     inputManager().processSDLEvent(event);
-    renderer().processSDLEvent(event);
+    renderer()->processSDLEvent(event);
 
     SDL_AppResult result = SDLEvent(event);
 

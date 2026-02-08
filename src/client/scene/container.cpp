@@ -77,7 +77,7 @@ void Container::sortChildren()
     std::ranges::sort(m_children, {}, &Container::m_zIndex);
 }
 
-void Container::renderChildren(const Matrix3x3& transform, Renderer& renderer)
+void Container::renderChildren(const Matrix3x3& transform, Renderer* renderer)
 {
     if (m_sortDirty) {
         m_sortDirty = false;

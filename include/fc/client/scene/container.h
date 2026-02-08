@@ -10,10 +10,6 @@
 #include "fc/core/math/matrix.h"
 #include "fc/core/math/vec2.h"
 
-#include <glad/gl.h>
-
-#include <SDL3/SDL_render.h>
-
 #include <cassert>
 #include <vector>
 
@@ -52,9 +48,9 @@ public:
 
     void sortChildren();
 
-    void renderChildren(const Matrix3x3& transform, Renderer& renderer);
+    void renderChildren(const Matrix3x3& transform, Renderer* renderer);
 
-    virtual void render(const Matrix3x3& transform, Renderer& renderer) { };
+    virtual void render(const Matrix3x3& transform, Renderer* renderer) { };
 
     virtual void destroyChildren();
 

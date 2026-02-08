@@ -7,8 +7,11 @@ add_library(
     ./app.cpp
     ./inputManager.cpp
     ./render/batcher.cpp
+    ./render/gl/glBatcher.cpp
+    ./render/gl/glRenderer.cpp
+    ./render/gl/glTexture.cpp
     ./render/renderer.cpp
-    ./render/shader.cpp
+    ./render/gl/shader.cpp
     ./render/texture.cpp
     ./resources.cpp
     ./scene/container.cpp
@@ -30,8 +33,11 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/color.h
         ${FIRECAT_INCLUDE_DIR}/client/inputManager.h
         ${FIRECAT_INCLUDE_DIR}/client/render/batcher.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/gl/glBatcher.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/gl/glRenderer.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/gl/glTexture.h
         ${FIRECAT_INCLUDE_DIR}/client/render/renderer.h
-        ${FIRECAT_INCLUDE_DIR}/client/render/shader.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/gl/shader.h
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h
         ${FIRECAT_INCLUDE_DIR}/client/resources.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/container.h

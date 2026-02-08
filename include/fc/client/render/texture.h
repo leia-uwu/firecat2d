@@ -6,33 +6,21 @@
 
 #pragma once
 
-#include <glad/gl.h>
-
 #include <cstdint>
 
 class Texture
 {
 public:
-    GLuint id;
-
-    GLuint width;
-    GLuint height;
-
-    GLuint internalFormat;
-    GLuint imageFormat;
-
-    GLuint wrapS;
-    GLuint wrapT;
-    GLuint filterMin;
-    GLuint filterMax;
+    uint32_t width;
+    uint32_t height;
 
     Texture();
     Texture(const Texture& other) = delete;
     Texture operator=(const Texture& other) = delete;
 
-    void generate(GLuint width, GLuint height, uint8_t* data);
+    virtual void generate(uint32_t width, uint32_t height, uint8_t* data) = 0;
 
     void bind() const;
 
-    ~Texture();
+    virtual ~Texture() = default;
 };
