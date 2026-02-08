@@ -5,6 +5,7 @@
 */
 
 #include "fc/client/inputManager.h"
+#include "fc/client/render/gl/glRenderer.h"
 #include "fc/client/render/renderer.h"
 #include "fc/core/ticker.h"
 
@@ -15,8 +16,9 @@
 class GameApp
 {
 public:
-    GameApp(const Renderer::InitFlags& flags) : m_renderer(flags)
+    GameApp(const Renderer::InitFlags& flags)
     {
+        m_renderer = new GlRenderer(flags);
     }
     virtual SDL_AppResult init(int argc, char** argv);
 
@@ -31,9 +33,12 @@ public:
      */
     virtual SDL_AppResult SDLEvent(SDL_Event* event);
 
-    virtual ~GameApp() = default;
+    virtual ~GameApp()
+    {
+        delete m_renderer;
+    };
 
-    Renderer& renderer()
+    Renderer* renderer()
     {
         return m_renderer;
     }
@@ -53,7 +58,7 @@ public:
     SDL_AppResult processSDLEvent(SDL_Event* event);
 
 protected:
-    Renderer m_renderer;
+    Renderer* m_renderer;
 
     InputManager m_inputManager;
 
@@ -73,7 +78,7 @@ protected:
     {                                                                 \
         auto* app = new APP();                                        \
                                                                       \
-        SDL_AppResult result = app->renderer().init();                \
+        SDL_AppResult result = app->renderer()->init();               \
         if (result != SDL_APP_CONTINUE) {                             \
             return result;                                            \
         }                                                             \

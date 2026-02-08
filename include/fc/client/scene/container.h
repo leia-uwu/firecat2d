@@ -52,9 +52,9 @@ public:
 
     void sortChildren();
 
-    void renderChildren(const Matrix3x3& transform, Renderer& renderer);
+    void renderChildren(const Matrix3x3& transform, Renderer* renderer);
 
-    virtual void render(const Matrix3x3& transform, Renderer& renderer) { };
+    virtual void render(const Matrix3x3& transform, Renderer* renderer) { };
 
     virtual void destroyChildren();
 

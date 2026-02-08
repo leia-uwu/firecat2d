@@ -31,11 +31,11 @@ public:
         textureId = id;
     }
 
-    void render(const Matrix3x3& transform, Renderer& renderer) override
+    void render(const Matrix3x3& transform, Renderer* renderer) override
     {
-        auto* texture = renderer.resources().getTexture(textureId);
+        auto* texture = renderer->resources().getTexture(textureId);
 
-        renderer.batcher().addBatchable(RenderBatcher::TextureBatchable{
+        renderer->batcher()->addBatchable(RenderBatcher::TextureBatchable{
             texture,
             tint,
             Matrix3x3{transform}.mulScale({width / 2.F, height / 2.F}),

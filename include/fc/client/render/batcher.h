@@ -7,22 +7,20 @@
 #pragma once
 
 #include "fc/client/color.h"
-#include "fc/client/render/shader.h"
 #include "fc/client/render/texture.h"
 #include "fc/core/math/matrix.h"
 #include "fc/core/math/vec2.h"
 
 #include <cassert>
 #include <cstddef>
-#include <memory>
+#include <cstdint>
 
 class RenderBatcher
 {
 public:
     Matrix3x3 transform;
 
-    void init();
-    ~RenderBatcher();
+    virtual ~RenderBatcher() = default;
 
     struct Vertex
     {
@@ -40,9 +38,7 @@ public:
         [[nodiscard]] virtual size_t batchSize() const = 0;
         [[nodiscard]] virtual size_t indices() const = 0;
 
-    private:
-        virtual void addToBatcher(RenderBatcher& batcher) const = 0;
-        friend class RenderBatcher;
+        virtual void addToBatcher(RenderBatcher* batcher) const = 0;
     };
 
     class TextureBatchable : public Batchable
@@ -68,11 +64,11 @@ public:
         [[nodiscard]] size_t indices() const override;
 
     private:
-        void addToBatcher(RenderBatcher& batcher) const override;
+        void addToBatcher(RenderBatcher* batcher) const override;
     };
 
-    void addVertice(const Vertex& vert);
-    void addIndice(uint32_t i);
+    virtual void addVertice(const Vertex& vert);
+    virtual void addIndice(uint32_t i);
 
     [[nodiscard]] uint32_t indiceOffset() const
     {
@@ -84,36 +80,17 @@ public:
         m_indicesOffset += i;
     }
 
-    void addBatchable(const Batchable& batchable);
+    virtual void addBatchable(const Batchable& batchable) = 0;
 
-    void beginBatch();
-    void flushBatch();
-
-private:
+protected:
     static constexpr size_t MAX_BATCH_VERTICES = 4096;
     static constexpr size_t MAX_INDEX_SIZE = MAX_BATCH_VERTICES * 6;
-
-    Shader m_spriteShader;
-
     bool m_initialized = false;
 
-    GLuint m_quadVAO;
-    GLuint m_quadVBO;
-    GLuint m_quadEBO;
-
     Vertex m_vertices[MAX_BATCH_VERTICES];
-    GLuint m_indices[MAX_INDEX_SIZE];
+    uint32_t m_indices[MAX_INDEX_SIZE];
 
     size_t m_batchIndex = 0;
     size_t m_indicesIndex = 0;
     size_t m_indicesOffset = 0;
-
-    Texture* m_lastTexture;
-    std::unique_ptr<Texture> m_whiteTexture;
-
-    void addSprite(
-        const Vec2F& pos,
-        const Vec2F& scale,
-        const Color& tint
-    );
 };

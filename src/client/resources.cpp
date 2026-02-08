@@ -5,6 +5,7 @@
 */
 
 #include "fc/client/resources.h"
+#include "fc/client/render/renderer.h"
 #include "fc/core/buffer.h"
 
 #include <SDL3/SDL_filesystem.h>
@@ -83,7 +84,9 @@ static void loadFile(const std::string& path, const std::function<void(bool succ
 
 void ResourceManager::loadTexture(const char* id, const char* path)
 {
-    m_textures[id] = std::make_unique<Texture>();
+    assert(m_renderer);
+
+    m_textures[id] = std::unique_ptr<Texture>(m_renderer->createTexture());
     Texture* texture = m_textures[id].get();
 #ifndef __EMSCRIPTEN__
     std::string filePath = SDL_GetBasePath();
@@ -116,4 +119,9 @@ Texture* ResourceManager::getTexture(const std::string& id)
     assert(m_textures.contains(id));
 
     return m_textures[id].get();
+}
+
+void ResourceManager::setRenderer(Renderer* renderer)
+{
+    m_renderer = renderer;
 }

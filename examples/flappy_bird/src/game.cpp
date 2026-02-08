@@ -18,18 +18,18 @@
 
 SDL_AppResult Game::init(int /*argc*/, char** /*argv*/)
 {
-    SDL_SetWindowMinimumSize(renderer().window(), GAME_WIDTH, GAME_HEIGHT);
-    renderer().setClearColor(0x141414);
+    SDL_SetWindowMinimumSize(renderer()->window(), GAME_WIDTH, GAME_HEIGHT);
+    renderer()->setClearColor(0x141414);
 
-    renderer().resources().loadTexture("bird", "assets/bird.png");
-    renderer().resources().loadTexture("pipe", "assets/pipe.png");
+    renderer()->resources().loadTexture("bird", "assets/bird.png");
+    renderer()->resources().loadTexture("pipe", "assets/pipe.png");
 
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult Game::update(float dt)
 {
-    if (renderer().focused()) {
+    if (renderer()->focused()) {
         //
         // update loop, only run when focused
         //
@@ -64,8 +64,8 @@ SDL_AppResult Game::update(float dt)
     // RENDER
     //
 
-    root.position.x = -renderer().windowWidth() / 2.F;
-    root.position.y = -renderer().windowHeight() / 2.F;
+    root.position.x = -renderer()->windowWidth() / 2.F;
+    root.position.y = -renderer()->windowHeight() / 2.F;
 
     for (auto& pipe : m_pipes) {
         pipe->render();

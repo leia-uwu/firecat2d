@@ -10,8 +10,6 @@
 #include "fc/client/render/batcher.h"
 #include "fc/client/resources.h"
 
-#include <glad/gl.h>
-
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_video.h>
 
@@ -32,13 +30,13 @@ public:
     Renderer(const InitFlags& flags);
     Renderer(const Renderer&) = delete;
 
-    ~Renderer();
+    virtual ~Renderer() = default;
 
     /**
-     * Tries to initialize SDL, the window and OpenGL context
+     * Tries to initialize SDL, the window and rendering context
      * If it fails you should exit the program
      */
-    SDL_AppResult init();
+    virtual SDL_AppResult init() = 0;
 
     void processSDLEvent(SDL_Event* event);
 
@@ -62,10 +60,7 @@ public:
         return m_resources;
     }
 
-    RenderBatcher& batcher()
-    {
-        return m_batcher;
-    }
+    virtual RenderBatcher* batcher() = 0;
 
     Color clearColor()
     {
@@ -77,11 +72,13 @@ public:
         m_clearColor = color;
     }
 
-    void clear();
+    virtual void beginFrame() = 0;
+    virtual void endFrame() = 0;
 
-private:
+    virtual Texture* createTexture() = 0;
+
+protected:
     SDL_Window* m_window = nullptr;
-    SDL_GLContext m_glContext;
 
     std::string m_windowTitle;
 
@@ -91,10 +88,9 @@ private:
     bool m_resizable = true;
     bool m_focused = true;
 
-    void resize();
+    virtual void resize() = 0;
 
     Color m_clearColor;
 
     ResourceManager m_resources;
-    RenderBatcher m_batcher;
 };

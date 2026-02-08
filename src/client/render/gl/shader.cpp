@@ -4,7 +4,7 @@
     SPDX-FileCopyrightText: 2026 firecat2d developers
 */
 
-#include "fc/client/render/shader.h"
+#include "fc/client/render/gl/shader.h"
 
 #include <glad/gl.h>
 #include <iostream>

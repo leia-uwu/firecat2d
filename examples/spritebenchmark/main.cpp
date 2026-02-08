@@ -39,34 +39,34 @@ public:
 
     SDL_AppResult init(int /*argc*/, char** /*argv*/) override
     {
-        renderer().resources().loadTexture("bird", "assets/bird.png");
+        renderer()->resources().loadTexture("bird", "assets/bird.png");
 
         for (auto& sprite : m_sprites) {
             sprite.setTexture("bird");
             sprite.width = 64;
             sprite.height = 64;
             sprite.tint = std::rand();
-            sprite.position.x = renderer().windowWidth() / 2.F;
-            sprite.position.y = renderer().windowHeight() / 2.F;
+            sprite.position.x = renderer()->windowWidth() / 2.F;
+            sprite.position.y = renderer()->windowHeight() / 2.F;
             sprite.velocity.x = ((std::rand() / (float)RAND_MAX) * 1000) - 500;
             sprite.velocity.y = ((std::rand() / (float)RAND_MAX) * 1000) - 500;
             sprite.rotationDir = ((std::rand() / (float)RAND_MAX) * 20) - 10;
             m_root.addChild(&sprite);
         }
-        renderer().setClearColor(0);
+        renderer()->setClearColor(0);
 
         return SDL_APP_CONTINUE;
     };
 
     SDL_AppResult update(float dt) override
     {
-        m_root.position.x = -(renderer().windowWidth() / 2.F);
-        m_root.position.y = -(renderer().windowHeight() / 2.F);
+        m_root.position.x = -(renderer()->windowWidth() / 2.F);
+        m_root.position.y = -(renderer()->windowHeight() / 2.F);
         for (auto& sprite : m_sprites) {
             sprite.position += sprite.velocity * dt;
 
-            int width = renderer().windowWidth();
-            int height = renderer().windowHeight();
+            int width = renderer()->windowWidth();
+            int height = renderer()->windowHeight();
 
             if (sprite.position.x < 0 || sprite.position.x > width) {
                 sprite.velocity.x = -sprite.velocity.x;

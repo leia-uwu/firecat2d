@@ -42,7 +42,7 @@ public:
 
     SDL_AppResult init(int /*argc*/, char** /*argv*/) override
     {
-        renderer().resources().loadTexture("bird", "assets/bird.png");
+        renderer()->resources().loadTexture("bird", "assets/bird.png");
 
         for (size_t i = 0, y = 0, x = 0; i < m_sprites.size(); i++) {
             GridSprite& sprite = m_sprites[i];
@@ -64,7 +64,7 @@ public:
             m_grid.insertEntity(i, sprite.hitbox.min, sprite.hitbox.max);
             m_root.addChild(&sprite);
         }
-        renderer().setClearColor(0);
+        renderer()->setClearColor(0);
 
         return SDL_APP_CONTINUE;
     };
@@ -80,7 +80,7 @@ public:
         }
 
         const std::vector<uint16_t>* query;
-        Vec2 mousePos = {m_inputManager.getMousePos().x, m_renderer.windowHeight() - m_inputManager.getMousePos().y};
+        Vec2 mousePos = {m_inputManager.getMousePos().x, m_renderer->windowHeight() - m_inputManager.getMousePos().y};
 
         if (m_queryLine) {
             query = &m_grid.queryLine(m_lineStart, mousePos);
@@ -92,7 +92,7 @@ public:
             m_sprites[id].tint = 0xff0000;
         }
         if (m_inputManager.isMouseBtnDown(1)) {
-            m_lineStart = {m_inputManager.getMousePos().x, m_renderer.windowHeight() - m_inputManager.getMousePos().y};
+            m_lineStart = {m_inputManager.getMousePos().x, m_renderer->windowHeight() - m_inputManager.getMousePos().y};
         }
 
         if (m_inputManager.isKeyDown("K") && m_queryLine) {
