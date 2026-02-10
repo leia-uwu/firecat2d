@@ -113,5 +113,5 @@ void Shader::setVec4(const char* name, float x, float y, float z, float w) const
 
 void Shader::setMatrix3(const char* name, const Matrix3x3& matrix) const
 {
-    glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, GL_FALSE, matrix.arr.data());
+    glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, GL_TRUE, matrix.arr.data());
 }

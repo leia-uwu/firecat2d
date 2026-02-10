@@ -64,9 +64,6 @@ SDL_AppResult Game::update(float dt)
     // RENDER
     //
 
-    root.position.x = -renderer()->windowWidth() / 2.F;
-    root.position.y = -renderer()->windowHeight() / 2.F;
-
     for (auto& pipe : m_pipes) {
         pipe->render();
     }

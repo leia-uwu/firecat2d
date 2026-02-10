@@ -60,8 +60,6 @@ public:
 
     SDL_AppResult update(float dt) override
     {
-        m_root.position.x = -(renderer()->windowWidth() / 2.F);
-        m_root.position.y = -(renderer()->windowHeight() / 2.F);
         for (auto& sprite : m_sprites) {
             sprite.position += sprite.velocity * dt;
 

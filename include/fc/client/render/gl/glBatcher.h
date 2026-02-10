@@ -6,11 +6,9 @@
 
 #pragma once
 
-#include "fc/client/color.h"
 #include "fc/client/render/batcher.h"
 #include "fc/client/render/gl/glTexture.h"
 #include "fc/client/render/gl/shader.h"
-#include "fc/core/math/vec2.h"
 
 #include <cassert>
 #include <memory>
@@ -35,6 +33,9 @@ public:
 
 private:
     Shader m_spriteShader;
+
+    Vertex m_vertices[MAX_BATCH_VERTICES];
+    uint16_t m_indices[MAX_INDEX_SIZE];
 
     GLuint m_quadVAO;
     GLuint m_quadVBO;

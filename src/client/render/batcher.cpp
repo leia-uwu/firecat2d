@@ -8,22 +8,6 @@
 
 #include <cstdint>
 
-void RenderBatcher::addVertice(const Vertex& vert)
-{
-    assert((m_batchIndex + 1) < MAX_BATCH_VERTICES);
-
-    m_vertices[m_batchIndex] = vert;
-    m_batchIndex++;
-}
-
-void RenderBatcher::addIndice(uint32_t i)
-{
-    assert((m_indicesIndex + 1) < MAX_INDEX_SIZE);
-
-    m_indices[m_indicesIndex] = i;
-    m_indicesIndex++;
-}
-
 RenderBatcher::Batchable::Batchable(Texture* texture) : texture(texture)
 {
 }

@@ -71,10 +71,6 @@ public:
 
     SDL_AppResult update(float /*dt*/) override
     {
-        Vec2F center = {WINDOW_SIZE / 2.F, WINDOW_SIZE / 2.F};
-
-        m_root.position = -center;
-
         for (auto& sprite : m_sprites) {
             sprite.tint = 0xffffff;
         }

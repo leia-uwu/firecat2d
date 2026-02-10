@@ -130,7 +130,7 @@ void GlRenderer::resize()
 {
     glViewport(0, 0, m_windowWidth, m_windowHeight);
     m_batcher->transform = Matrix3x3(
-        {0, 0},
+        {-1, -1},
         0,
         {1.F / (m_windowWidth / 2.F), (1.F / (m_windowHeight / 2.F))}
     );

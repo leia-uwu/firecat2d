@@ -7,18 +7,23 @@
 #include "fc/client/inputManager.h"
 #include "fc/client/render/gl/glRenderer.h"
 #include "fc/client/render/renderer.h"
+#include "fc/client/render/sg/sgRenderer.h"
 #include "fc/core/ticker.h"
 
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_init.h>
-#include <SDL3/SDL_timer.h>
 
 class GameApp
 {
 public:
     GameApp(const Renderer::InitFlags& flags)
     {
+#ifdef __EMSCRIPTEN__
         m_renderer = new GlRenderer(flags);
+#else
+        // m_renderer = new GlRenderer(flags);
+        m_renderer = new SgRenderer(flags);
+#endif
     }
     virtual SDL_AppResult init(int argc, char** argv);
 

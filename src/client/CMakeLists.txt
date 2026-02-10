@@ -10,6 +10,9 @@ add_library(
     ./render/gl/glBatcher.cpp
     ./render/gl/glRenderer.cpp
     ./render/gl/glTexture.cpp
+    ./render/sg/sgBatcher.cpp
+    ./render/sg/sgRenderer.cpp
+    ./render/sg/sgTexture.cpp
     ./render/renderer.cpp
     ./render/gl/shader.cpp
     ./render/texture.cpp
@@ -36,6 +39,9 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/render/gl/glBatcher.h
         ${FIRECAT_INCLUDE_DIR}/client/render/gl/glRenderer.h
         ${FIRECAT_INCLUDE_DIR}/client/render/gl/glTexture.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/sg/sgBatcher.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/sg/sgRenderer.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/sg/sgTexture.h
         ${FIRECAT_INCLUDE_DIR}/client/render/renderer.h
         ${FIRECAT_INCLUDE_DIR}/client/render/gl/shader.h
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h

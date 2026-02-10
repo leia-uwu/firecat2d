@@ -29,6 +29,10 @@ public:
     {
     }
 
+    Matrix3x3(std::array<float, 9> data) : arr(data)
+    {
+    }
+
     Matrix3x3(const Vec2F& pos, float rot, const Vec2F& scale)
     {
         auto sin = std::sin(rot);
@@ -105,6 +109,17 @@ public:
         };
     }
 
+    [[nodiscard]] std::array<float, 12> to3x4() const
+    {
+        return {
+            // clang-format off
+            arr[0],arr[1],arr[2], 0.0,
+            arr[3],arr[4],arr[5], 0.0,
+            arr[6],arr[7],arr[8], 0.0,
+            // clang-format on
+        };
+    }
+
     float operator[](uint8_t index) const
     {
         return arr[index];
@@ -114,4 +129,18 @@ public:
     {
         return arr[index];
     };
+
+    [[nodiscard]] std::string toString() const
+    {
+        return std::format(
+            "{:.4f}, {:.4f}, {:.4f}\n{:.4f}, {:.4f}, {:.4f}\n{:.4f}, {:.4f}, {:.4f}\n",
+            arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8]
+        );
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Matrix3x3& vec)
+    {
+        os << vec.toString();
+        return os;
+    }
 };

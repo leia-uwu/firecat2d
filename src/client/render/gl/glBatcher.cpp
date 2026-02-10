@@ -48,7 +48,7 @@ void main()
     float a = float((a_color      ) & 255u) / 255.0;
     v_color = vec4(r, g, b, a);
     v_textureCord = a_textureCord;
-    gl_Position = mat4(u_transform) * vec4(a_pos.x, a_pos.y, 0.0, 1.0);
+    gl_Position = vec4(vec3(a_pos, 1.0) * u_transform, 1.0);
 }
 )";
 
@@ -144,7 +144,7 @@ void GlRenderBatcher::flushBatch()
     m_spriteShader.setMatrix3("u_transform", transform);
 
     glBindVertexArray(m_quadVAO);
-    glDrawElements(GL_TRIANGLES, m_indicesIndex, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, m_indicesIndex, GL_UNSIGNED_SHORT, nullptr);
 }
 
 void GlRenderBatcher::addVertice(const Vertex& vert)

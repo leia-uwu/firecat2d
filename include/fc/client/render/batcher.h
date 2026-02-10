@@ -67,8 +67,8 @@ public:
         void addToBatcher(RenderBatcher* batcher) const override;
     };
 
-    virtual void addVertice(const Vertex& vert);
-    virtual void addIndice(uint32_t i);
+    virtual void addVertice(const Vertex& vert) = 0;
+    virtual void addIndice(uint32_t i) = 0;
 
     [[nodiscard]] uint32_t indiceOffset() const
     {
@@ -84,11 +84,12 @@ public:
 
 protected:
     static constexpr size_t MAX_BATCH_VERTICES = 4096;
-    static constexpr size_t MAX_INDEX_SIZE = MAX_BATCH_VERTICES * 6;
-    bool m_initialized = false;
+    static constexpr size_t VERTEX_BUFFER_SIZE = MAX_BATCH_VERTICES * sizeof(Vertex);
 
-    Vertex m_vertices[MAX_BATCH_VERTICES];
-    uint32_t m_indices[MAX_INDEX_SIZE];
+    static constexpr size_t MAX_INDEX_SIZE = MAX_BATCH_VERTICES * 6;
+    static constexpr size_t INDEX_BUFFER_SIZE = MAX_INDEX_SIZE * sizeof(uint16_t);
+
+    bool m_initialized = false;
 
     size_t m_batchIndex = 0;
     size_t m_indicesIndex = 0;
