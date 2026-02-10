@@ -7,6 +7,7 @@
 #include "fc/client/inputManager.h"
 #include "fc/client/render/gl/glRenderer.h"
 #include "fc/client/render/renderer.h"
+#include "fc/client/render/sg/sgRenderer.h"
 #include "fc/core/ticker.h"
 
 #include <SDL3/SDL_events.h>
@@ -18,7 +19,7 @@ class GameApp
 public:
     GameApp(const Renderer::InitFlags& flags)
     {
-        m_renderer = new GlRenderer(flags);
+        m_renderer = new SgRenderer(flags);
     }
     virtual SDL_AppResult init(int argc, char** argv);
 
