@@ -12,8 +12,8 @@
 #include <cstdint>
 #include <iostream>
 
-#include "../shaders/sprite.frag.spv.h"
-#include "../shaders/sprite.vert.spv.h"
+#include "sprite.frag.h"
+#include "sprite.vert.h"
 
 void SgRenderBatcher::init(SDL_GPUDevice* device, SDL_Window* window)
 {
@@ -53,11 +53,17 @@ void SgRenderBatcher::init(SDL_GPUDevice* device, SDL_Window* window)
         &buffInf
     );
 
+#ifndef __APPLE_
+#define SHADER_FORMAT SDL_GPU_SHADERFORMAT_SPIRV
+#else
+#define SHADER_FORMAT SDL_GPU_SHADERFORMAT_MSL
+#endif
+
     SDL_GPUShaderCreateInfo fragShaderInfo{
         .code_size = sizeof(sprite_frag),
         .code = (uint8_t*)&sprite_frag,
         .entrypoint = "main",
-        .format = SDL_GPU_SHADERFORMAT_SPIRV,
+        .format = SHADER_FORMAT,
         .stage = SDL_GPU_SHADERSTAGE_FRAGMENT,
         .num_samplers = 1,
         .num_uniform_buffers = 0

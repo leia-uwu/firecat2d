@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2026 firecat2d developers
+include(shaders)
+
+compileShader(render/shaders/ sprite frag)
+compileShader(render/shaders/ sprite vert)
 
 add_library(
     fc_client
@@ -20,6 +24,8 @@ add_library(
     ./scene/container.cpp
 )
 
+target_include_directories(fc_client PRIVATE ${CMAKE_BINARY_DIR}/include/shaders)
+
 target_link_libraries(fc_client fc::core SDL3::SDL3)
 if (NOT DEFINED EMSCRIPTEN)
     target_link_libraries(fc_client OpenGL::GL)
@@ -30,7 +36,7 @@ target_sources(
     PUBLIC
     FILE_SET HEADERS
     TYPE HEADERS
-    BASE_DIRS ${FIRECAT_INCLUDE_BASE}
+    BASE_DIRS ${FIRECAT_INCLUDE_BASE} ${CMAKE_BINARY_DIR}/include
     FILES
         ${FIRECAT_INCLUDE_DIR}/client/app.h
         ${FIRECAT_INCLUDE_DIR}/client/color.h
@@ -47,5 +53,9 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h
         ${FIRECAT_INCLUDE_DIR}/client/resources.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/container.h
+
+        ${sprite_frag_out}
+        ${sprite_vert_out}
 )
 add_library(fc::client ALIAS fc_client)
+
