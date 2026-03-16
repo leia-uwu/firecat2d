@@ -5,7 +5,6 @@ add_executable(spritebenchmark main.cpp)
 
 target_link_libraries(
     spritebenchmark
-    PRIVATE SDL3::SDL3
     fc::client
 )
 

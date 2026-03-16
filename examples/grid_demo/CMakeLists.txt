@@ -5,7 +5,6 @@ add_executable(grid_demo main.cpp)
 
 target_link_libraries(
     grid_demo
-    PRIVATE SDL3::SDL3
     fc::client
 )
 

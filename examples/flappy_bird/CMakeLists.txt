@@ -11,7 +11,6 @@ add_executable(flappy_bird ${FLAPPY_SRC})
 
 target_link_libraries(
     flappy_bird
-    PRIVATE SDL3::SDL3
     fc::client
 )
 
