@@ -14,33 +14,33 @@ function(compileShader path name type)
 
     set(${name}_${type}_out ${shaderHeaderOut} PARENT_SCOPE)
 
-    if (NOT APPLE)
+    # if (NOT APPLE)
         add_custom_command(
             COMMAND ${GLSLANG} -V -o ${shaderHeaderOut} ${shaderIn} --vn ${name}_${type}
             OUTPUT ${shaderHeaderOut}
             DEPENDS ${shaderIn}
             VERBATIM
         )
-    else()
-        find_program(SPIRV_CROSS spirv-cross)
-        add_custom_command(
-            COMMAND ${GLSLANG} -V -o ${shaderOut} ${shaderIn}
-            OUTPUT ${shaderOut}
-            DEPENDS ${shaderIn}
-            VERBATIM
-        )
-        add_custom_command(
-            COMMAND ${SPIRV_CROSS} --msl ${shaderOut} --output ${shaderOut}.msl
-            OUTPUT ${shaderOut}.msl
-            DEPENDS ${shaderOut}
-            VERBATIM
-        )
-        add_custom_command(
-            COMMAND sh -c "echo -e \"#pragma once\\nconst int ${name}_${type}[] = {\\n    #embed <${shaderOut}.msl>\\n};\\n\" > ${shaderHeaderOut}"
-            OUTPUT ${shaderHeaderOut}
-            DEPENDS ${shaderOut}.msl
-            VERBATIM
-        )
-    endif()
+    # else()
+    #     find_program(SPIRV_CROSS spirv-cross)
+    #     add_custom_command(
+    #         COMMAND ${GLSLANG} -V -o ${shaderOut} ${shaderIn}
+    #         OUTPUT ${shaderOut}
+    #         DEPENDS ${shaderIn}
+    #         VERBATIM
+    #     )
+    #     add_custom_command(
+    #         COMMAND ${SPIRV_CROSS} --msl ${shaderOut} --output ${shaderOut}.msl
+    #         OUTPUT ${shaderOut}.msl
+    #         DEPENDS ${shaderOut}
+    #         VERBATIM
+    #     )
+    #     add_custom_command(
+    #         COMMAND sh -c "echo -e \"#pragma once\\nconst int ${name}_${type}[] = {\\n    #embed <${shaderOut}.msl>\\n};\\n\" > ${shaderHeaderOut}"
+    #         OUTPUT ${shaderHeaderOut}
+    #         DEPENDS ${shaderOut}.msl
+    #         VERBATIM
+    #     )
+    # endif()
 
 endfunction()

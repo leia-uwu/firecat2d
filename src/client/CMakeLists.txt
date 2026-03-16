@@ -26,9 +26,14 @@ add_library(
 
 target_include_directories(fc_client PRIVATE ${CMAKE_BINARY_DIR}/include/shaders)
 
+
 target_link_libraries(fc_client fc::core SDL3::SDL3)
 if (NOT DEFINED EMSCRIPTEN)
-    target_link_libraries(fc_client OpenGL::GL)
+target_link_libraries(fc_client OpenGL::GL)
+endif()
+if (APPLE)
+    find_package(Vulkan COMPONENTS MoltenVK)
+    target_link_libraries(fc_client Vulkan::MoltenVK)
 endif()
 
 target_sources(

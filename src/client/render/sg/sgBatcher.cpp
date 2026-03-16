@@ -53,11 +53,7 @@ void SgRenderBatcher::init(SDL_GPUDevice* device, SDL_Window* window)
         &buffInf
     );
 
-#ifndef __APPLE_
-#define SHADER_FORMAT SDL_GPU_SHADERFORMAT_SPIRV
-#else
-#define SHADER_FORMAT SDL_GPU_SHADERFORMAT_MSL
-#endif
+    #define SHADER_FORMAT SDL_GPU_SHADERFORMAT_SPIRV
 
     SDL_GPUShaderCreateInfo fragShaderInfo{
         .code_size = sizeof(sprite_frag),
@@ -72,14 +68,14 @@ void SgRenderBatcher::init(SDL_GPUDevice* device, SDL_Window* window)
     SDL_GPUShader* fragShader = SDL_CreateGPUShader(m_device, &fragShaderInfo);
 
     if (fragShader == nullptr) {
-        std::cerr << "SDL_CreateGPUShader error: " << SDL_GetError() << "\n";
+        std::cerr << "(frag) SDL_CreateGPUShader error: " << SDL_GetError() << "\n";
     }
 
     SDL_GPUShaderCreateInfo vertShaderInfo{
         .code_size = sizeof(sprite_vert),
         .code = (uint8_t*)&sprite_vert,
         .entrypoint = "main",
-        .format = SDL_GPU_SHADERFORMAT_SPIRV,
+        .format = SHADER_FORMAT,
         .stage = SDL_GPU_SHADERSTAGE_VERTEX,
         .num_uniform_buffers = 1,
     };
@@ -87,7 +83,7 @@ void SgRenderBatcher::init(SDL_GPUDevice* device, SDL_Window* window)
     SDL_GPUShader* vertShader = SDL_CreateGPUShader(m_device, &vertShaderInfo);
 
     if (vertShader == nullptr) {
-        std::cerr << "SDL_CreateGPUShader error: " << SDL_GetError() << "\n";
+        std::cerr << "(vert) SDL_CreateGPUShader error: " << SDL_GetError() << "\n";
     }
 
     // Create the pipeline
