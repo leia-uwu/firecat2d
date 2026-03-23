@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2026 firecat2d developers
+
+enable_external_cmake_lint = true
+line_max_words = 120
+
+[format]
+program = "gersemi"
+args = ["--indent", "4"]
