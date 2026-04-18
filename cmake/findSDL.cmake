@@ -7,8 +7,9 @@ function(findSDL)
         FetchContent_Declare(
             SDL
             GIT_REPOSITORY https://github.com/libsdl-org/SDL
-            GIT_TAG        release-3.2.26
+            GIT_TAG        release-3.4.10
             GIT_SHALLOW ON
+            GIT_PROGRESS ON
         )
         FetchContent_MakeAvailable(SDL)
     endif()

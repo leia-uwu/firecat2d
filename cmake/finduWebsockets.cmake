@@ -10,6 +10,7 @@ function(finduWebsockets)
             GIT_TAG v1.3.1
             GIT_SHALLOW ON
             GIT_SUBMODULES ""
+            GIT_PROGRESS ON
         )
         FetchContent_MakeAvailable(zlib)
     endif()
@@ -21,6 +22,7 @@ function(finduWebsockets)
         GIT_TAG v0.8.8
         GIT_SHALLOW ON
         GIT_SUBMODULES ""
+        GIT_PROGRESS ON
     )
     FetchContent_MakeAvailable(uSockets)
     file(GLOB_RECURSE SOURCES ${usockets_SOURCE_DIR}/src/*.c)
@@ -35,6 +37,7 @@ function(finduWebsockets)
         GIT_TAG v20.74.0
         GIT_SHALLOW ON
         GIT_SUBMODULES ""
+        GIT_PROGRESS ON
     )
     FetchContent_MakeAvailable(uWebSockets)
 
