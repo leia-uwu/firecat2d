@@ -26,7 +26,6 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/core/formatter.h
         ${FIRECAT_INCLUDE_DIR}/core/idPool.h
         ${FIRECAT_INCLUDE_DIR}/core/math/gmath.h
-        ${FIRECAT_INCLUDE_DIR}/core/math/matrix.h
         ${FIRECAT_INCLUDE_DIR}/core/math/vec2.h
         ${FIRECAT_INCLUDE_DIR}/core/ticker.h
 )

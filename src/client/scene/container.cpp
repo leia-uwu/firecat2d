@@ -7,6 +7,8 @@
 #include "fc/client/scene/container.h"
 #include <algorithm>
 
+#include <include/core/SkCanvas.h>
+
 Container& Container::addChild(Container* child)
 {
     assert(child != nullptr);
@@ -77,16 +79,24 @@ void Container::sortChildren()
     std::ranges::sort(m_children, {}, &Container::m_zIndex);
 }
 
-void Container::renderChildren(const Matrix3x3& transform, Renderer& renderer)
+void Container::renderChildren(Renderer::RenderCtx& ctx)
 {
     if (m_sortDirty) {
         m_sortDirty = false;
         sortChildren();
     }
+
     for (Container* child : m_children) {
-        auto childT = Matrix3x3::mul(transform, child->getMatrix());
-        child->renderChildren(childT, renderer);
-        child->render(childT, renderer);
+        Renderer::RenderCtx childCtx = ctx;
+
+        child->updateTransform();
+
+        ctx.canvas->save();
+        ctx.canvas->concat(child->transform());
+        child->renderChildren(childCtx);
+
+        child->render(ctx);
+        ctx.canvas->restore();
     }
 }
 

@@ -15,62 +15,29 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-2025
 
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest]
-        c_compiler: [clang64]
-        include:
-          - os: windows-latest
-            c_compiler: clang64
-            cpp_compiler: clang64
-    defaults:
-      run:
-        shell: msys2 {0}
     steps:
-      - uses: msys2/setup-msys2@v2
-        with:
-          msystem: ${{matrix.c_compiler}}
-          update: true
-          install: >-
-            git
-            make
-          pacboy: >-
-            toolchain:p
-            cmake:p
-            ninja:p
-            sccache:p
-            sdl3:p
-
       - uses: actions/checkout@v4
 
       - name: Setup sccache
         uses: hendrikmuhs/ccache-action@v1.2.20
         with:
           variant: sccache
-          create-symlink: false
+          create-symlink: true
           update-package-index: false
           key: ${{ runner.os }}-${{ runner.arch }}-sccache
 
       - name: Configure CMake
         run: >
-          cmake -B build -G "Ninja Multi-Config"
+          cmake -B build -G "Ninja"
+          -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl
           -DCMAKE_C_COMPILER_LAUNCHER=sccache
           -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
-          -DBUILD_TESTING=ON
 
-      - name: Build (Debug)
-        run: cmake --build build --config Debug
+      - name: Build
+        run: cmake --build build
 
-      - name: Build (Release)
-        run: cmake --build build --config Release
-
-      - name: Run Tests (Debug)
+      - name: Run Tests
         working-directory: build
-        run: ctest --build-config Debug
-
-      - name: Run Tests (Release)
-        working-directory: build
-        run: ctest --build-config Release
+        run: ctest --output-on-failure

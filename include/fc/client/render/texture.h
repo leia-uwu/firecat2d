@@ -6,33 +6,32 @@
 
 #pragma once
 
-#include <glad/gl.h>
-
 #include <cstdint>
+#include <include/core/SkImage.h>
+#include <include/core/SkRefCnt.h>
+#include <include/core/SkSamplingOptions.h>
+
+class SkImage;
 
 class Texture
 {
 public:
-    GLuint id;
-
-    GLuint width;
-    GLuint height;
-
-    GLuint internalFormat;
-    GLuint imageFormat;
-
-    GLuint wrapS;
-    GLuint wrapT;
-    GLuint filterMin;
-    GLuint filterMax;
+    uint32_t width;
+    uint32_t height;
 
     Texture();
     Texture(const Texture& other) = delete;
     Texture operator=(const Texture& other) = delete;
 
-    void generate(GLuint width, GLuint height, uint8_t* data);
+    void generate(uint32_t width, uint32_t height, uint8_t* data);
 
-    void bind() const;
+    sk_sp<SkImage> image()
+    {
+        return m_image;
+    }
 
-    ~Texture();
+    SkSamplingOptions sampling;
+
+private:
+    sk_sp<SkImage> m_image;
 };

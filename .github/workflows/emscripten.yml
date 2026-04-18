@@ -10,25 +10,28 @@ concurrency:
 on:
   push:
     branches: ["master"]
+  pull_request:
+    branches: ["master"]
 
 permissions:
   contents: read
   pages: write
-  id-token: write
 
 jobs:
-  github-pages-wasm-build:
+  build:
     runs-on: ubuntu-latest
     container:
       image: archlinux
+      env:
+        EMSCRIPTEN_ROOT: "/usr/lib/emscripten"
     steps:
       - uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pacman -Syu --noconfirm cmake git emscripten ninja pnpm
+        run: pacman -Syu --noconfirm cmake make git pkgconf emscripten ninja pnpm
 
       - name: Configure CMake
-        run: /usr/lib/emscripten/emcmake cmake --preset dev_wasm
+        run: cmake --preset dev_wasm
 
       - name: Build
         run: cmake --build build_wasm --config Release
@@ -42,13 +45,16 @@ jobs:
         working-directory: examples/
 
       - name: Setup Pages
+        if: github.ref == 'refs/heads/master'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./examples/dist"
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
         id: deployment
         uses: actions/deploy-pages@v4

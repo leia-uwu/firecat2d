@@ -7,32 +7,48 @@
 #pragma once
 
 #include "fc/client/render/renderer.h"
-#include "fc/core/math/matrix.h"
 #include "fc/core/math/vec2.h"
-
-#include <glad/gl.h>
 
 #include <SDL3/SDL_render.h>
 
 #include <cassert>
 #include <vector>
 
+#include <include/core/SkM44.h>
+
 class Container
 {
-private:
+protected:
     std::vector<Container*> m_children;
     Container* m_parent = nullptr;
     int32_t m_zIndex = 0;
     bool m_sortDirty = false;
+
+    SkM44 m_transform;
 
 public:
     Vec2F position;
     Vec2F scale = {1, 1};
     float rotation = 0;
 
-    [[nodiscard]] Matrix3x3 getMatrix() const
+    void updateTransform()
     {
-        return {position, rotation, scale};
+        const float cos = std::cos(rotation);
+        const float sin = std::sin(rotation);
+
+        m_transform = {
+            // clang-format off
+             scale.x * cos,  scale.y * sin,   0,  position.x,
+            -sin * scale.y,  cos * scale.y,   0,  position.y,
+                         0,              0,   1,           0,
+                         0,              0,   0,           1,
+            // clang-format on
+        };
+    }
+
+    [[nodiscard]] SkM44& transform()
+    {
+        return m_transform;
     }
 
     Container& addChild(Container* child);
@@ -52,9 +68,9 @@ public:
 
     void sortChildren();
 
-    void renderChildren(const Matrix3x3& transform, Renderer& renderer);
+    void renderChildren(Renderer::RenderCtx& ctx);
 
-    virtual void render(const Matrix3x3& transform, Renderer& renderer) { };
+    virtual void render(Renderer::RenderCtx& ctx) { };
 
     virtual void destroyChildren();
 

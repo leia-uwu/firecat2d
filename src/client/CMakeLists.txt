@@ -6,18 +6,13 @@ add_library(
     STATIC
     ./app.cpp
     ./inputManager.cpp
-    ./render/batcher.cpp
     ./render/renderer.cpp
-    ./render/shader.cpp
     ./render/texture.cpp
     ./resources.cpp
     ./scene/container.cpp
 )
 
-target_link_libraries(fc_client fc::core SDL3::SDL3)
-if (NOT DEFINED EMSCRIPTEN)
-    target_link_libraries(fc_client OpenGL::GL)
-endif()
+target_link_libraries(fc_client fc::core SDL3::SDL3 skia)
 
 target_sources(
     fc_client
@@ -29,9 +24,6 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/app.h
         ${FIRECAT_INCLUDE_DIR}/client/color.h
         ${FIRECAT_INCLUDE_DIR}/client/inputManager.h
-        ${FIRECAT_INCLUDE_DIR}/client/render/batcher.h
-        ${FIRECAT_INCLUDE_DIR}/client/render/renderer.h
-        ${FIRECAT_INCLUDE_DIR}/client/render/shader.h
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h
         ${FIRECAT_INCLUDE_DIR}/client/resources.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/container.h

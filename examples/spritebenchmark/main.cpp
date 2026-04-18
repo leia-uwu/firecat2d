@@ -18,7 +18,6 @@
 class BenchSprite : public SpriteItem
 {
 public:
-    BenchSprite() : SpriteItem() { };
     Vec2F velocity;
     float rotationDir;
 };
@@ -60,8 +59,6 @@ public:
 
     SDL_AppResult update(float dt) override
     {
-        m_root.position.x = -(renderer().windowWidth() / 2.F);
-        m_root.position.y = -(renderer().windowHeight() / 2.F);
         for (auto& sprite : m_sprites) {
             sprite.position += sprite.velocity * dt;
 
@@ -81,13 +78,11 @@ public:
             sprite.position.y = std::clamp(sprite.position.y, 0.F, (float)height);
         }
 
-        m_root.renderChildren(m_root.getMatrix(), renderer());
         return SDL_APP_CONTINUE;
     };
 
 private:
-    Container m_root;
-    std::array<BenchSprite, 9999> m_sprites;
+    std::array<BenchSprite, 999> m_sprites;
 };
 
 INIT_APP(Benchmark)

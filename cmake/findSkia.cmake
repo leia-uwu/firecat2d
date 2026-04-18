@@ -1,0 +1,946 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2026 firecat2d developers
+
+FetchContent_Declare(
+    skia_src
+    URL https://github.com/google/skia/archive/refs/heads/chrome/m150.zip
+)
+FetchContent_MakeAvailable(skia_src)
+
+set(SKIA_PATH ${skia_src_SOURCE_DIR})
+
+set(skia_sources
+    ${SKIA_PATH}/src/base/SkArenaAlloc.cpp
+    ${SKIA_PATH}/src/base/SkBase64.cpp
+    ${SKIA_PATH}/src/base/SkBezierCurves.cpp
+    ${SKIA_PATH}/src/base/SkBlockAllocator.cpp
+    ${SKIA_PATH}/src/base/SkBuffer.cpp
+    ${SKIA_PATH}/src/base/SkContainers.cpp
+    ${SKIA_PATH}/src/base/SkCubics.cpp
+    ${SKIA_PATH}/src/base/SkDebug.cpp
+    ${SKIA_PATH}/src/base/SkDeque.cpp
+    ${SKIA_PATH}/src/base/SkFloatingPoint.cpp
+    ${SKIA_PATH}/src/base/SkHalf.cpp
+    ${SKIA_PATH}/src/base/SkLog.cpp
+    ${SKIA_PATH}/src/base/SkMalloc.cpp
+    ${SKIA_PATH}/src/base/SkMathPriv.cpp
+    ${SKIA_PATH}/src/base/SkQuads.cpp
+    ${SKIA_PATH}/src/base/SkSafeMath.cpp
+    ${SKIA_PATH}/src/base/SkSemaphore.cpp
+    ${SKIA_PATH}/src/base/SkSharedMutex.cpp
+    ${SKIA_PATH}/src/base/SkSpinlock.cpp
+    ${SKIA_PATH}/src/base/SkTDArray.cpp
+    ${SKIA_PATH}/src/base/SkTSearch.cpp
+    ${SKIA_PATH}/src/base/SkThreadID.cpp
+    ${SKIA_PATH}/src/base/SkTime.cpp
+    ${SKIA_PATH}/src/base/SkUTF.cpp
+    ${SKIA_PATH}/src/base/SkUtils.cpp
+
+    ${SKIA_PATH}/src/capture/SkCapture.cpp
+    ${SKIA_PATH}/src/capture/SkCaptureCanvas.cpp
+    ${SKIA_PATH}/src/capture/SkCaptureManager.cpp
+
+    ${SKIA_PATH}/src/core/SkAAClip.cpp
+    ${SKIA_PATH}/src/core/SkATrace.cpp
+    ${SKIA_PATH}/src/core/SkAlphaRuns.cpp
+    ${SKIA_PATH}/src/core/SkAnalyticEdge.cpp
+    ${SKIA_PATH}/src/core/SkAnnotation.cpp
+    ${SKIA_PATH}/src/core/SkAutoPixmapStorage.cpp
+    ${SKIA_PATH}/src/core/SkBBHFactory.cpp
+    ${SKIA_PATH}/src/core/SkBigPicture.cpp
+    ${SKIA_PATH}/src/core/SkBitmap.cpp
+    ${SKIA_PATH}/src/core/SkBitmapCache.cpp
+    ${SKIA_PATH}/src/core/SkBitmapDevice.cpp
+    ${SKIA_PATH}/src/core/SkBitmapProcState.cpp
+    ${SKIA_PATH}/src/core/SkBitmapProcState_matrixProcs.cpp
+    ${SKIA_PATH}/src/core/SkBitmapProcState_opts.cpp
+    ${SKIA_PATH}/src/core/SkBitmapProcState_opts_lasx.cpp
+    ${SKIA_PATH}/src/core/SkBitmapProcState_opts_ssse3.cpp
+    ${SKIA_PATH}/src/core/SkBlendMode.cpp
+    ${SKIA_PATH}/src/core/SkBlendModeBlender.cpp
+    ${SKIA_PATH}/src/core/SkBlitMask_opts.cpp
+    ${SKIA_PATH}/src/core/SkBlitMask_opts_ssse3.cpp
+    ${SKIA_PATH}/src/core/SkBlitRow_D32.cpp
+    ${SKIA_PATH}/src/core/SkBlitRow_opts.cpp
+    ${SKIA_PATH}/src/core/SkBlitRow_opts_lasx.cpp
+    ${SKIA_PATH}/src/core/SkBlitRow_opts_ml3.cpp
+    ${SKIA_PATH}/src/core/SkBlitter.cpp
+    ${SKIA_PATH}/src/core/SkBlitter_A8.cpp
+    ${SKIA_PATH}/src/core/SkBlitter_ARGB32.cpp
+    ${SKIA_PATH}/src/core/SkBlitter_Sprite.cpp
+    ${SKIA_PATH}/src/core/SkBlurEngine.cpp
+    ${SKIA_PATH}/src/core/SkBlurMask.cpp
+    ${SKIA_PATH}/src/core/SkBlurMaskFilterImpl.cpp
+    ${SKIA_PATH}/src/core/SkCPUContext.cpp
+    ${SKIA_PATH}/src/core/SkCPURecorder.cpp
+    ${SKIA_PATH}/src/core/SkCachedData.cpp
+    ${SKIA_PATH}/src/core/SkCanvas.cpp
+    ${SKIA_PATH}/src/core/SkCanvasPriv.cpp
+    ${SKIA_PATH}/src/core/SkCanvas_Raster.cpp
+    ${SKIA_PATH}/src/core/SkCapabilities.cpp
+    ${SKIA_PATH}/src/core/SkChecksum.cpp
+    ${SKIA_PATH}/src/core/SkClipStack.cpp
+    ${SKIA_PATH}/src/core/SkClipStackDevice.cpp
+    ${SKIA_PATH}/src/core/SkColor.cpp
+    ${SKIA_PATH}/src/core/SkColorFilter.cpp
+    ${SKIA_PATH}/src/core/SkColorSpace.cpp
+    ${SKIA_PATH}/src/core/SkColorSpaceXformSteps.cpp
+    ${SKIA_PATH}/src/core/SkColorTable.cpp
+    ${SKIA_PATH}/src/core/SkCompressedDataUtils.cpp
+    ${SKIA_PATH}/src/core/SkContourMeasure.cpp
+    ${SKIA_PATH}/src/core/SkConvertPixels.cpp
+    ${SKIA_PATH}/src/core/SkCpu.cpp
+    ${SKIA_PATH}/src/core/SkCubicClipper.cpp
+    ${SKIA_PATH}/src/core/SkCubicMap.cpp
+    ${SKIA_PATH}/src/core/SkData.cpp
+    ${SKIA_PATH}/src/core/SkDataTable.cpp
+    ${SKIA_PATH}/src/core/SkDescriptor.cpp
+    ${SKIA_PATH}/src/core/SkDevice.cpp
+    ${SKIA_PATH}/src/core/SkDistanceFieldGen.cpp
+    ${SKIA_PATH}/src/core/SkDocument.cpp
+    ${SKIA_PATH}/src/core/SkDraw.cpp
+    ${SKIA_PATH}/src/core/SkDrawShadowInfo.cpp
+    ${SKIA_PATH}/src/core/SkDraw_atlas.cpp
+    ${SKIA_PATH}/src/core/SkDraw_text.cpp
+    ${SKIA_PATH}/src/core/SkDraw_vertices.cpp
+    ${SKIA_PATH}/src/core/SkDrawable.cpp
+    ${SKIA_PATH}/src/core/SkEdge.cpp
+    ${SKIA_PATH}/src/core/SkEdgeBuilder.cpp
+    ${SKIA_PATH}/src/core/SkEdgeClipper.cpp
+    ${SKIA_PATH}/src/core/SkExecutor.cpp
+    ${SKIA_PATH}/src/core/SkFlattenable.cpp
+    ${SKIA_PATH}/src/core/SkFont.cpp
+    ${SKIA_PATH}/src/core/SkFontDescriptor.cpp
+    ${SKIA_PATH}/src/core/SkFontMetricsPriv.cpp
+    ${SKIA_PATH}/src/core/SkFontMgr.cpp
+    ${SKIA_PATH}/src/core/SkFontStream.cpp
+    ${SKIA_PATH}/src/core/SkFont_serial.cpp
+    ${SKIA_PATH}/src/core/SkGaussFilter.cpp
+    ${SKIA_PATH}/src/core/SkGeometry.cpp
+    ${SKIA_PATH}/src/core/SkGlobalInitialization_core.cpp
+    ${SKIA_PATH}/src/core/SkGlyph.cpp
+    ${SKIA_PATH}/src/core/SkGlyphRunPainter.cpp
+    ${SKIA_PATH}/src/core/SkGraphics.cpp
+    ${SKIA_PATH}/src/core/SkIDChangeListener.cpp
+    ${SKIA_PATH}/src/core/SkImageFilter.cpp
+    ${SKIA_PATH}/src/core/SkImageFilterCache.cpp
+    ${SKIA_PATH}/src/core/SkImageFilterTypes.cpp
+    ${SKIA_PATH}/src/core/SkImageGenerator.cpp
+    ${SKIA_PATH}/src/core/SkImageInfo.cpp
+    ${SKIA_PATH}/src/core/SkKnownRuntimeEffects.cpp
+    ${SKIA_PATH}/src/core/SkLatticeIter.cpp
+    ${SKIA_PATH}/src/core/SkLineClipper.cpp
+    ${SKIA_PATH}/src/core/SkLocalMatrixImageFilter.cpp
+    ${SKIA_PATH}/src/core/SkM44.cpp
+    ${SKIA_PATH}/src/core/SkMD5.cpp
+    ${SKIA_PATH}/src/core/SkMallocPixelRef.cpp
+    ${SKIA_PATH}/src/core/SkMask.cpp
+    ${SKIA_PATH}/src/core/SkMaskBlurFilter.cpp
+    ${SKIA_PATH}/src/core/SkMaskCache.cpp
+    ${SKIA_PATH}/src/core/SkMaskFilter.cpp
+    ${SKIA_PATH}/src/core/SkMaskFilterBase.cpp
+    ${SKIA_PATH}/src/core/SkMaskGamma.cpp
+    ${SKIA_PATH}/src/core/SkMasks.cpp
+    ${SKIA_PATH}/src/core/SkMatrix.cpp
+    ${SKIA_PATH}/src/core/SkMatrixInvert.cpp
+    ${SKIA_PATH}/src/core/SkMemset_opts.cpp
+    ${SKIA_PATH}/src/core/SkMemset_opts_avx.cpp
+    ${SKIA_PATH}/src/core/SkMemset_opts_erms.cpp
+    ${SKIA_PATH}/src/core/SkMesh.cpp
+    ${SKIA_PATH}/src/core/SkMipmap.cpp
+    ${SKIA_PATH}/src/core/SkMipmapAccessor.cpp
+    ${SKIA_PATH}/src/core/SkMipmapBuilder.cpp
+    ${SKIA_PATH}/src/core/SkMipmapDrawDownSampler.cpp
+    ${SKIA_PATH}/src/core/SkMipmapHQDownSampler.cpp
+    ${SKIA_PATH}/src/core/SkOpts.cpp
+    ${SKIA_PATH}/src/core/SkOverdrawCanvas.cpp
+    ${SKIA_PATH}/src/core/SkPaint.cpp
+    ${SKIA_PATH}/src/core/SkPaintPriv.cpp
+    ${SKIA_PATH}/src/core/SkPath.cpp
+    ${SKIA_PATH}/src/core/SkPathBuilder.cpp
+    ${SKIA_PATH}/src/core/SkPathData.cpp
+    ${SKIA_PATH}/src/core/SkPathDump.cpp
+    ${SKIA_PATH}/src/core/SkPathEffect.cpp
+    ${SKIA_PATH}/src/core/SkPathIter.cpp
+    ${SKIA_PATH}/src/core/SkPathMeasure.cpp
+    ${SKIA_PATH}/src/core/SkPathPriv.cpp
+    ${SKIA_PATH}/src/core/SkPathRaw.cpp
+    ${SKIA_PATH}/src/core/SkPathRawShapes.cpp
+    ${SKIA_PATH}/src/core/SkPathUtils.cpp
+    ${SKIA_PATH}/src/core/SkPath_interpolate.cpp
+    ${SKIA_PATH}/src/core/SkPath_serial.cpp
+    ${SKIA_PATH}/src/core/SkPicture.cpp
+    ${SKIA_PATH}/src/core/SkPictureData.cpp
+    ${SKIA_PATH}/src/core/SkPictureFlat.cpp
+    ${SKIA_PATH}/src/core/SkPicturePlayback.cpp
+    ${SKIA_PATH}/src/core/SkPictureRecord.cpp
+    ${SKIA_PATH}/src/core/SkPictureRecorder.cpp
+    ${SKIA_PATH}/src/core/SkPixelRef.cpp
+    ${SKIA_PATH}/src/core/SkPixelStorage.cpp
+    ${SKIA_PATH}/src/core/SkPixmap.cpp
+    ${SKIA_PATH}/src/core/SkPixmapDraw.cpp
+    ${SKIA_PATH}/src/core/SkPoint.cpp
+    ${SKIA_PATH}/src/core/SkPoint3.cpp
+    ${SKIA_PATH}/src/core/SkPtrRecorder.cpp
+    ${SKIA_PATH}/src/core/SkQuadClipper.cpp
+    ${SKIA_PATH}/src/core/SkRRect.cpp
+    ${SKIA_PATH}/src/core/SkRSXform.cpp
+    ${SKIA_PATH}/src/core/SkRTree.cpp
+    ${SKIA_PATH}/src/core/SkRasterClip.cpp
+    ${SKIA_PATH}/src/core/SkRasterPipeline.cpp
+    ${SKIA_PATH}/src/core/SkRasterPipelineBlitter.cpp
+    ${SKIA_PATH}/src/core/SkReadBuffer.cpp
+    ${SKIA_PATH}/src/core/SkReadPixelsRec.cpp
+    ${SKIA_PATH}/src/core/SkRecord.cpp
+    ${SKIA_PATH}/src/core/SkRecordCanvas.cpp
+    ${SKIA_PATH}/src/core/SkRecordDraw.cpp
+    ${SKIA_PATH}/src/core/SkRecordOpts.cpp
+    ${SKIA_PATH}/src/core/SkRecordedDrawable.cpp
+    ${SKIA_PATH}/src/core/SkRecords.cpp
+    ${SKIA_PATH}/src/core/SkRect.cpp
+    ${SKIA_PATH}/src/core/SkRegion.cpp
+    ${SKIA_PATH}/src/core/SkRegion_path.cpp
+    ${SKIA_PATH}/src/core/SkResourceCache.cpp
+    ${SKIA_PATH}/src/core/SkRuntimeBlender.cpp
+    ${SKIA_PATH}/src/core/SkRuntimeEffect.cpp
+    ${SKIA_PATH}/src/core/SkSLTypeShared.cpp
+    ${SKIA_PATH}/src/core/SkScalar.cpp
+    ${SKIA_PATH}/src/core/SkScalerContext.cpp
+    ${SKIA_PATH}/src/core/SkScan.cpp
+    ${SKIA_PATH}/src/core/SkScan_AAAPath.cpp
+    ${SKIA_PATH}/src/core/SkScan_AntiPath.cpp
+    ${SKIA_PATH}/src/core/SkScan_Antihair.cpp
+    ${SKIA_PATH}/src/core/SkScan_Hairline.cpp
+    ${SKIA_PATH}/src/core/SkScan_Path.cpp
+    ${SKIA_PATH}/src/core/SkSpecialImage.cpp
+    ${SKIA_PATH}/src/core/SkSpriteBlitter_ARGB32.cpp
+    ${SKIA_PATH}/src/core/SkStream.cpp
+    ${SKIA_PATH}/src/core/SkStrike.cpp
+    ${SKIA_PATH}/src/core/SkStrikeCache.cpp
+    ${SKIA_PATH}/src/core/SkStrikeRef.cpp
+    ${SKIA_PATH}/src/core/SkStrikeSpec.cpp
+    ${SKIA_PATH}/src/core/SkString.cpp
+    ${SKIA_PATH}/src/core/SkStringUtils.cpp
+    ${SKIA_PATH}/src/core/SkStroke.cpp
+    ${SKIA_PATH}/src/core/SkStrokeRec.cpp
+    ${SKIA_PATH}/src/core/SkStrokerPriv.cpp
+    ${SKIA_PATH}/src/core/SkSwizzle.cpp
+    ${SKIA_PATH}/src/core/SkSwizzler_opts.cpp
+    ${SKIA_PATH}/src/core/SkSwizzler_opts_lasx.cpp
+    ${SKIA_PATH}/src/core/SkSwizzler_opts_ml3.cpp
+    ${SKIA_PATH}/src/core/SkSwizzler_opts_ssse3.cpp
+    ${SKIA_PATH}/src/core/SkSynchronizedResourceCache.cpp
+    ${SKIA_PATH}/src/core/SkTaskGroup.cpp
+    ${SKIA_PATH}/src/core/SkTextBlob.cpp
+    ${SKIA_PATH}/src/core/SkTypeface.cpp
+    ${SKIA_PATH}/src/core/SkTypefaceCache.cpp
+    ${SKIA_PATH}/src/core/SkTypeface_remote.cpp
+    ${SKIA_PATH}/src/core/SkUnPreMultiply.cpp
+    ${SKIA_PATH}/src/core/SkVertState.cpp
+    ${SKIA_PATH}/src/core/SkVertices.cpp
+    ${SKIA_PATH}/src/core/SkWriteBuffer.cpp
+    ${SKIA_PATH}/src/core/SkWritePixelsRec.cpp
+    ${SKIA_PATH}/src/core/SkWriter32.cpp
+    ${SKIA_PATH}/src/core/SkYUVAInfo.cpp
+    ${SKIA_PATH}/src/core/SkYUVAPixmaps.cpp
+    ${SKIA_PATH}/src/core/SkYUVMath.cpp
+    ${SKIA_PATH}/src/core/SkYUVPlanesCache.cpp
+
+    ${SKIA_PATH}/src/effects/Sk1DPathEffect.cpp
+    ${SKIA_PATH}/src/effects/Sk2DPathEffect.cpp
+    ${SKIA_PATH}/src/effects/SkBlenders.cpp
+    ${SKIA_PATH}/src/effects/SkColorMatrix.cpp
+    ${SKIA_PATH}/src/effects/SkColorMatrixFilter.cpp
+    ${SKIA_PATH}/src/effects/SkCornerPathEffect.cpp
+    ${SKIA_PATH}/src/effects/SkDashPathEffect.cpp
+    ${SKIA_PATH}/src/effects/SkDiscretePathEffect.cpp
+    ${SKIA_PATH}/src/effects/SkEmbossMask.cpp
+    ${SKIA_PATH}/src/effects/SkEmbossMaskFilter.cpp
+    ${SKIA_PATH}/src/effects/SkHighContrastFilter.cpp
+    ${SKIA_PATH}/src/effects/SkShaderMaskFilterImpl.cpp
+    ${SKIA_PATH}/src/effects/SkTableMaskFilter.cpp
+    ${SKIA_PATH}/src/effects/SkTrimPathEffect.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkBlendModeColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkColorFilterBase.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkColorSpaceXformColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkComposeColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkGaussianColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkMatrixColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkRuntimeColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkTableColorFilter.cpp
+    ${SKIA_PATH}/src/effects/colorfilters/SkWorkingFormatColorFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkBlendImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkBlurImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkColorFilterImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkComposeImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkCropImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkDisplacementMapImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkDropShadowImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkImageImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkLightingImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkMagnifierImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkMatrixConvolutionImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkMatrixTransformImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkMergeImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkMorphologyImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkPictureImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkRuntimeImageFilter.cpp
+    ${SKIA_PATH}/src/effects/imagefilters/SkShaderImageFilter.cpp
+
+    ${SKIA_PATH}/src/encode/SkEncoder.cpp
+    ${SKIA_PATH}/src/encode/SkICC.cpp
+
+    ${SKIA_PATH}/src/gpu/Blend.cpp
+    ${SKIA_PATH}/src/gpu/BlendFormula.cpp
+    ${SKIA_PATH}/src/gpu/BlurUtils.cpp
+    ${SKIA_PATH}/src/gpu/DataUtils.cpp
+    ${SKIA_PATH}/src/gpu/MutableTextureState.cpp
+    ${SKIA_PATH}/src/gpu/RectanizerSkyline.cpp
+    ${SKIA_PATH}/src/gpu/ResourceKey.cpp
+    ${SKIA_PATH}/src/gpu/ShaderErrorHandler.cpp
+    ${SKIA_PATH}/src/gpu/SkBackingFit.cpp
+    ${SKIA_PATH}/src/gpu/SkSLToBackend.cpp
+    ${SKIA_PATH}/src/gpu/TiledTextureUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ClipStack.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/Device.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/Device_drawTexture.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrAHardwareBufferImageGenerator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrAHardwareBufferUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrAtlasTypes.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrAttachment.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrAuditTrail.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBackendSemaphore.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBackendSurface.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBackendTextureImageGenerator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBackendUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBlurUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBufferAllocPool.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBufferTransferRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrBufferUpdateRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrCanvas.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrCaps.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrClientMappedBufferManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrColorInfo.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrColorSpaceXform.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrContextThreadSafeProxy.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrContext_Base.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrCopyRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDDLContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDDLTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDataUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDefaultGeoProcFactory.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDeferredDisplayList.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDeferredDisplayListRecorder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDirectContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDirectContextPriv.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDistanceFieldGenFromVector.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDrawOpAtlas.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDrawOpTest.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDrawingManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDriverBugWorkarounds.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrDynamicAtlas.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrEagerVertexAllocator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrFixedClip.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrFragmentProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrFragmentProcessors.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrGeometryProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrGpu.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrGpuBuffer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrGpuResource.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrImageContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrImageInfo.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrManagedResource.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrMemoryPool.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrMeshBuffers.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrMeshDrawTarget.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrOnFlushResourceProvider.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrOpFlushState.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrOpsRenderPass.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrPaint.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrPersistentCacheUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrPipeline.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProcessorAnalysis.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProcessorSet.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProcessorUnitTest.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProgramDesc.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProgramInfo.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrPromiseImageTexture.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrProxyProvider.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRecordingContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRecordingContextPriv.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRenderTarget.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRenderTargetProxy.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRenderTaskCluster.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrResourceAllocator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrResourceCache.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrResourceProvider.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrRingBuffer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSPIRVUniformHandler.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSPIRVVaryingHandler.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSWMaskHelper.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrShaderCaps.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrShaderVar.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrStagingBufferManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrStencilSettings.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrStyle.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSurface.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSurfaceCharacterization.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSurfaceProxy.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrSurfaceProxyView.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTestUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTexture.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTextureProxy.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTextureProxyCacheAccess.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTextureRenderTargetProxy.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTextureResolveRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrThreadSafeCache.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrThreadSafePipelineBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrTransferFromRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrUniformDataManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrUtil.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrVertexChunkArray.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrWaitRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrWritePixelsRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrXferProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrYUVABackendTextures.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/GrYUVATextureProxies.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/PathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/PathRendererChain.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/SkGr.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/StencilMaskHelper.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/SurfaceContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/SurfaceDrawContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/SurfaceFillContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrBezierEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrBicubicEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrBitmapTextGeoProc.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrBlendFragmentProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrColorTableEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrConvexPolyEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrCoverageSetOpXP.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrCustomXfermode.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrDisableColorXP.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrDistanceFieldGeoProc.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrMatrixEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrModulateAtlasCoverageEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrOvalEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrPerlinNoise2Effect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrPorterDuffXferProcessor.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrRRectEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrShadowGeoProc.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrSkSLFP.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrTextureEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/effects/GrYUVtoRGBEffect.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrAAConvexTessellator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrAATriangulator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrPathUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrQuad.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrQuadUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrShape.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrStyledShape.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/geometry/GrTriangulator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/AHardwareBufferGL.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleGLESInterfaceAutogen.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleGLInterfaceAutogen.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleHelpers.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleInterface.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleWebGLInterfaceAutogen.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAttachment.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLBackendSurface.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLBuffer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLCaps.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLDirectContext.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLExtensions.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLFinishCallbacks.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLGLSL.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLGpu.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLGpuProgramCache.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLInterfaceAutogen.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLOpsRenderPass.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLProgram.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLProgramDataManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLRenderTarget.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLSemaphore.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLTexture.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLTextureRenderTarget.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLTypesPriv.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLUniformHandler.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLUtil.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLVertexArray.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/builders/GrGLProgramBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gl/builders/GrGLShaderStringBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLBlend.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLFragmentShaderBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLProgramBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLProgramDataManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLShaderBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLUniformHandler.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLVarying.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/glsl/GrGLSLVertexGeoBuilder.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gradients/GrGradientBitmapCache.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/gradients/GrGradientShader.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/GrImageUtils.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/GrMippedBitmap.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/GrTextureGenerator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_Ganesh.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_GaneshBase.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_GaneshFactories.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_GaneshYUVA.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_LazyTexture.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkImage_RasterPinnable.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/image/SkSpecialImage_Ganesh.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/mock/GrMockBackendSurface.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/mock/GrMockCaps.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/mock/GrMockGpu.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/mock/GrMockTypes.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AAConvexPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AAHairLinePathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AALinearizingConvexPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AtlasInstancedHelper.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AtlasPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AtlasRenderTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/AtlasTextOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/ClearOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DashLinePathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DashOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DefaultPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DrawAtlasOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DrawAtlasPathOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DrawMeshOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/DrawableOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/FillRRectOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/FillRectOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/GrMeshDrawOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/GrOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/GrOvalOpFactory.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/GrSimpleMeshDrawOpHelper.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/GrSimpleMeshDrawOpHelperWithStencil.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/LatticeOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/OpsTask.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/PathInnerTriangulateOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/PathStencilCoverOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/PathTessellateOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/QuadPerEdgeAA.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/RegionOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/ShadowRRectOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/SmallPathAtlasMgr.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/SmallPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/SmallPathShapeData.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/SoftwarePathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/StrokeRectOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/StrokeTessellateOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/TessellationPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/TextureOp.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/ops/TriangulatingPathRenderer.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/surface/SkSurface_Ganesh.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/tessellate/GrPathTessellationShader.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/tessellate/GrStrokeTessellationShader.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/tessellate/GrTessellationShader.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/tessellate/PathTessellator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/tessellate/StrokeTessellator.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/text/GlyphData.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/text/GrAtlasManager.cpp
+    ${SKIA_PATH}/src/gpu/ganesh/text/TextStrike.cpp
+
+    ${SKIA_PATH}/src/gpu/tessellate/FixedCountBufferUtils.cpp
+    ${SKIA_PATH}/src/gpu/tessellate/Tessellation.cpp
+
+    ${SKIA_PATH}/src/gpu/DitherUtils.cpp
+    ${SKIA_PATH}/src/gpu/RectanizerPow2.cpp
+    ${SKIA_PATH}/src/gpu/Swizzle.cpp
+
+    ${SKIA_PATH}/src/image/SkImage.cpp
+    ${SKIA_PATH}/src/image/SkImage_Base.cpp
+    ${SKIA_PATH}/src/image/SkImage_Lazy.cpp
+    ${SKIA_PATH}/src/image/SkImage_LazyFactories.cpp
+    ${SKIA_PATH}/src/image/SkImage_Picture.cpp
+    ${SKIA_PATH}/src/image/SkImage_Raster.cpp
+    ${SKIA_PATH}/src/image/SkImage_RasterFactories.cpp
+    ${SKIA_PATH}/src/image/SkPictureImageGenerator.cpp
+    ${SKIA_PATH}/src/image/SkRescaleAndReadPixels.cpp
+    ${SKIA_PATH}/src/image/SkSurface.cpp
+    ${SKIA_PATH}/src/image/SkSurface_Base.cpp
+    ${SKIA_PATH}/src/image/SkSurface_Null.cpp
+    ${SKIA_PATH}/src/image/SkSurface_Raster.cpp
+    ${SKIA_PATH}/src/image/SkTiledImageUtils.cpp
+
+    ${SKIA_PATH}/src/lazy/SkDiscardableMemoryPool.cpp
+
+    ${SKIA_PATH}/src/opts/SkOpts_lasx.cpp
+    ${SKIA_PATH}/src/opts/SkOpts_ml3.cpp
+    ${SKIA_PATH}/src/opts/SkOpts_ml4.cpp
+
+    ${SKIA_PATH}/src/pathops/SkAddIntersections.cpp
+    ${SKIA_PATH}/src/pathops/SkDConicLineIntersection.cpp
+    ${SKIA_PATH}/src/pathops/SkDCubicLineIntersection.cpp
+    ${SKIA_PATH}/src/pathops/SkDCubicToQuads.cpp
+    ${SKIA_PATH}/src/pathops/SkDLineIntersection.cpp
+    ${SKIA_PATH}/src/pathops/SkDQuadLineIntersection.cpp
+    ${SKIA_PATH}/src/pathops/SkIntersections.cpp
+    ${SKIA_PATH}/src/pathops/SkOpAngle.cpp
+    ${SKIA_PATH}/src/pathops/SkOpBuilder.cpp
+    ${SKIA_PATH}/src/pathops/SkOpCoincidence.cpp
+    ${SKIA_PATH}/src/pathops/SkOpContour.cpp
+    ${SKIA_PATH}/src/pathops/SkOpCubicHull.cpp
+    ${SKIA_PATH}/src/pathops/SkOpEdgeBuilder.cpp
+    ${SKIA_PATH}/src/pathops/SkOpSegment.cpp
+    ${SKIA_PATH}/src/pathops/SkOpSpan.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsAsWinding.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsCommon.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsConic.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsCubic.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsCurve.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsDebug.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsLine.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsOp.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsQuad.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsRect.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsSimplify.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsTSect.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsTightBounds.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsTypes.cpp
+    ${SKIA_PATH}/src/pathops/SkPathOpsWinding.cpp
+    ${SKIA_PATH}/src/pathops/SkPathWriter.cpp
+    ${SKIA_PATH}/src/pathops/SkReduceOrder.cpp
+
+    ${SKIA_PATH}/src/shaders/SkBitmapProcShader.cpp
+    ${SKIA_PATH}/src/shaders/SkBlendShader.cpp
+    ${SKIA_PATH}/src/shaders/SkColorFilterShader.cpp
+    ${SKIA_PATH}/src/shaders/SkColorShader.cpp
+    ${SKIA_PATH}/src/shaders/SkCoordClampShader.cpp
+    ${SKIA_PATH}/src/shaders/SkEmptyShader.cpp
+    ${SKIA_PATH}/src/shaders/SkGainmapShader.cpp
+    ${SKIA_PATH}/src/shaders/SkImageShader.cpp
+    ${SKIA_PATH}/src/shaders/SkLocalMatrixShader.cpp
+    ${SKIA_PATH}/src/shaders/SkPerlinNoiseShaderImpl.cpp
+    ${SKIA_PATH}/src/shaders/SkPictureShader.cpp
+    ${SKIA_PATH}/src/shaders/SkRuntimeShader.cpp
+    ${SKIA_PATH}/src/shaders/SkShader.cpp
+    ${SKIA_PATH}/src/shaders/SkShaderBase.cpp
+    ${SKIA_PATH}/src/shaders/SkTransformShader.cpp
+    ${SKIA_PATH}/src/shaders/SkTriColorShader.cpp
+    ${SKIA_PATH}/src/shaders/SkWorkingColorSpaceShader.cpp
+    ${SKIA_PATH}/src/shaders/gradients/SkConicalGradient.cpp
+    ${SKIA_PATH}/src/shaders/gradients/SkGradientBaseShader.cpp
+    ${SKIA_PATH}/src/shaders/gradients/SkLinearGradient.cpp
+    ${SKIA_PATH}/src/shaders/gradients/SkRadialGradient.cpp
+    ${SKIA_PATH}/src/shaders/gradients/SkSweepGradient.cpp
+
+    ${SKIA_PATH}/src/sksl/SkSLBuiltinTypes.cpp
+    ${SKIA_PATH}/src/sksl/SkSLCompiler.cpp
+    ${SKIA_PATH}/src/sksl/SkSLConstantFolder.cpp
+    ${SKIA_PATH}/src/sksl/SkSLContext.cpp
+    ${SKIA_PATH}/src/sksl/SkSLGraphiteModules.cpp
+    ${SKIA_PATH}/src/sksl/SkSLInliner.cpp
+    ${SKIA_PATH}/src/sksl/SkSLModule.cpp
+    ${SKIA_PATH}/src/sksl/SkSLModuleDataDefault.cpp
+    ${SKIA_PATH}/src/sksl/SkSLModuleLoader.cpp
+    ${SKIA_PATH}/src/sksl/SkSLOperator.cpp
+    ${SKIA_PATH}/src/sksl/SkSLPool.cpp
+    ${SKIA_PATH}/src/sksl/SkSLSampleUsage.cpp
+    ${SKIA_PATH}/src/sksl/SkSLUtil.cpp
+
+    ${SKIA_PATH}/src/sksl/analysis/SkSLCanExitWithoutReturningValue.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLCheckProgramStructure.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLCheckSymbolTableCorrectness.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLFinalizationChecks.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLGetLoopControlFlowInfo.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLGetLoopUnrollInfo.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLGetReturnComplexity.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLHasSideEffects.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLIsConstantExpression.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLIsDynamicallyUniformExpression.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLIsSameExpressionTree.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLIsTrivialExpression.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLProgramUsage.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLReturnsInputAlpha.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLSpecialization.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLSwitchCaseContainsExit.cpp
+    ${SKIA_PATH}/src/sksl/analysis/SkSLSymbolTableStackBuilder.cpp
+
+    ${SKIA_PATH}/src/sksl/codegen/SkSLGLSLCodeGenerator.cpp
+    ${SKIA_PATH}/src/sksl/codegen/SkSLPipelineStageCodeGenerator.cpp
+    ${SKIA_PATH}/src/sksl/codegen/SkSLRasterPipelineBuilder.cpp
+    ${SKIA_PATH}/src/sksl/codegen/SkSLRasterPipelineCodeGenerator.cpp
+
+    ${SKIA_PATH}/src/sksl/ir/SkSLBinaryExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLBlock.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLChildCall.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructor.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorArray.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorArrayCast.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorCompound.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorCompoundCast.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorDiagonalMatrix.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorMatrixResize.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorScalarCast.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorSplat.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLConstructorStruct.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLDiscardStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLDoStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLExpressionStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLExtension.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLFieldAccess.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLForStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLFunctionCall.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLFunctionDeclaration.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLFunctionDefinition.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLIfStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLIndexExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLInterfaceBlock.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLLayout.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLLiteral.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLModifierFlags.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLModifiersDeclaration.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLPostfixExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLPrefixExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLProgram.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSetting.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLStructDefinition.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSwitchCase.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSwitchStatement.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSwizzle.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSymbol.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLSymbolTable.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLTernaryExpression.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLType.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLTypeReference.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLVarDeclarations.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLVariable.cpp
+    ${SKIA_PATH}/src/sksl/ir/SkSLVariableReference.cpp
+
+    ${SKIA_PATH}/src/sksl/lex/Main.cpp
+    ${SKIA_PATH}/src/sksl/lex/NFA.cpp
+    ${SKIA_PATH}/src/sksl/lex/RegexNode.cpp
+    ${SKIA_PATH}/src/sksl/lex/RegexParser.cpp
+    ${SKIA_PATH}/src/sksl/lex/TransitionTable.cpp
+
+    ${SKIA_PATH}/src/sksl/tracing/SkSLDebugTracePlayer.cpp
+    ${SKIA_PATH}/src/sksl/tracing/SkSLDebugTracePriv.cpp
+    ${SKIA_PATH}/src/sksl/tracing/SkSLTraceHook.cpp
+
+    ${SKIA_PATH}/src/sksl/transform/SkSLAddConstToVarModifiers.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateDeadFunctions.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateDeadGlobalVariables.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateDeadLocalVariables.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateEmptyStatements.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateUnnecessaryBraces.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLEliminateUnreachableCode.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLFindAndDeclareBuiltinFunctions.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLFindAndDeclareBuiltinStructs.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLFindAndDeclareBuiltinVariables.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLHoistSwitchVarDeclarationsAtTopLevel.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLRenamePrivateSymbols.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLReplaceConstVarsWithLiterals.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLReplaceSplatCastsWithSwizzles.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLRewriteIndexedSwizzle.cpp
+    ${SKIA_PATH}/src/sksl/transform/SkSLTransform.cpp
+
+    ${SKIA_PATH}/src/sksl/SkSLAnalysis.cpp
+    ${SKIA_PATH}/src/sksl/SkSLErrorReporter.cpp
+    ${SKIA_PATH}/src/sksl/SkSLIntrinsicList.cpp
+    ${SKIA_PATH}/src/sksl/SkSLLexer.cpp
+    ${SKIA_PATH}/src/sksl/SkSLMangler.cpp
+    ${SKIA_PATH}/src/sksl/SkSLOutputStream.cpp
+    ${SKIA_PATH}/src/sksl/SkSLParser.cpp
+    ${SKIA_PATH}/src/sksl/SkSLPosition.cpp
+    ${SKIA_PATH}/src/sksl/SkSLString.cpp
+
+    ${SKIA_PATH}/src/text/GlyphRun.cpp
+    ${SKIA_PATH}/src/text/SlugFromBuffer.cpp
+    ${SKIA_PATH}/src/text/StrikeForGPU.cpp
+    ${SKIA_PATH}/src/text/gpu/DistanceFieldAdjustTable.cpp
+    ${SKIA_PATH}/src/text/gpu/GlyphVector.cpp
+    ${SKIA_PATH}/src/text/gpu/SDFMaskFilter.cpp
+    ${SKIA_PATH}/src/text/gpu/SkChromeRemoteGlyphCache.cpp
+    ${SKIA_PATH}/src/text/gpu/Slug.cpp
+    ${SKIA_PATH}/src/text/gpu/SlugImpl.cpp
+    ${SKIA_PATH}/src/text/gpu/StrikeCache.cpp
+    ${SKIA_PATH}/src/text/gpu/SubRunAllocator.cpp
+    ${SKIA_PATH}/src/text/gpu/SubRunContainer.cpp
+    ${SKIA_PATH}/src/text/gpu/SubRunControl.cpp
+    ${SKIA_PATH}/src/text/gpu/TextBlob.cpp
+    ${SKIA_PATH}/src/text/gpu/TextBlobRedrawCoordinator.cpp
+    ${SKIA_PATH}/src/text/gpu/VertexFiller.cpp
+
+    ${SKIA_PATH}/src/utils/SkCamera.cpp
+    ${SKIA_PATH}/src/utils/SkCanvasStack.cpp
+    ${SKIA_PATH}/src/utils/SkCanvasStateUtils.cpp
+    ${SKIA_PATH}/src/utils/SkCharToGlyphCache.cpp
+    ${SKIA_PATH}/src/utils/SkClipStackUtils.cpp
+    ${SKIA_PATH}/src/utils/SkCustomTypeface.cpp
+    ${SKIA_PATH}/src/utils/SkDashPath.cpp
+    ${SKIA_PATH}/src/utils/SkEventTracer.cpp
+    ${SKIA_PATH}/src/utils/SkFloatToDecimal.cpp
+    ${SKIA_PATH}/src/utils/SkJSONWriter.cpp
+    ${SKIA_PATH}/src/utils/SkMatrix22.cpp
+    ${SKIA_PATH}/src/utils/SkMultiPictureDocument.cpp
+    ${SKIA_PATH}/src/utils/SkNWayCanvas.cpp
+    ${SKIA_PATH}/src/utils/SkNullCanvas.cpp
+    ${SKIA_PATH}/src/utils/SkOSPath.cpp
+    ${SKIA_PATH}/src/utils/SkOrderedFontMgr.cpp
+    ${SKIA_PATH}/src/utils/SkPaintFilterCanvas.cpp
+    ${SKIA_PATH}/src/utils/SkParse.cpp
+    ${SKIA_PATH}/src/utils/SkParseColor.cpp
+    ${SKIA_PATH}/src/utils/SkParsePath.cpp
+    ${SKIA_PATH}/src/utils/SkPatchUtils.cpp
+    ${SKIA_PATH}/src/utils/SkPolyUtils.cpp
+    ${SKIA_PATH}/src/utils/SkShaderUtils.cpp
+    ${SKIA_PATH}/src/utils/SkShadowTessellator.cpp
+    ${SKIA_PATH}/src/utils/SkShadowUtils.cpp
+    ${SKIA_PATH}/src/utils/SkTextUtils.cpp
+
+    ${SKIA_PATH}/src/sfnt/SkOTUtils.cpp
+    ${SKIA_PATH}/src/sfnt/SkOTTable_name.cpp
+
+    ${SKIA_PATH}/src/ports/SkGlobalInitialization_default.cpp
+    ${SKIA_PATH}/src/ports/SkMemory_malloc.cpp
+    ${SKIA_PATH}/src/ports/SkOSFile_stdio.cpp
+
+    ${SKIA_PATH}/src/codec/SkCodec.cpp
+    ${SKIA_PATH}/src/codec/SkCodecColorProfile.cpp
+    ${SKIA_PATH}/src/codec/SkCodecImageGenerator.cpp
+    ${SKIA_PATH}/src/codec/SkEncodedInfo.cpp
+    ${SKIA_PATH}/src/codec/SkHdrAgtm.cpp
+    ${SKIA_PATH}/src/codec/SkHdrAgtmParse.cpp
+    ${SKIA_PATH}/src/codec/SkHdrMetadata.cpp
+    ${SKIA_PATH}/src/codec/SkImageGenerator_FromEncoded.cpp
+    ${SKIA_PATH}/src/codec/SkPixmapUtils.cpp
+    ${SKIA_PATH}/src/codec/SkSampler.cpp
+
+    ${SKIA_PATH}/modules/skcms/skcms.cc
+    ${SKIA_PATH}/modules/skcms/src/skcms_TransformBaseline.cc
+)
+
+if (WIN32)
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/gpu/ganesh/gl/win/GrGLMakeNativeInterface_win.cpp
+        ${SKIA_PATH}/src/gpu/ganesh/gl/win/GrGLMakeWinInterface.cpp
+        ${SKIA_PATH}/src/ports/SkFontHost_win.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_win_dw.cpp
+        ${SKIA_PATH}/src/ports/SkLog_win.cpp
+        ${SKIA_PATH}/src/ports/SkOSFile_win.cpp
+        ${SKIA_PATH}/src/ports/SkScalerContext_win_dw.cpp
+        ${SKIA_PATH}/src/ports/SkTypeface_win_dw.cpp
+        ${SKIA_PATH}/src/utils/SkGetExecutablePath_win.cpp
+        ${SKIA_PATH}/src/utils/win/SkAutoCoInitialize.cpp
+        ${SKIA_PATH}/src/utils/win/SkDWrite.cpp
+        ${SKIA_PATH}/src/utils/win/SkDWriteFontFileStream.cpp
+        ${SKIA_PATH}/src/utils/win/SkDWriteGeometrySink.cpp
+        ${SKIA_PATH}/src/utils/win/SkHRESULT.cpp
+        ${SKIA_PATH}/src/utils/win/SkIStream.cpp
+        ${SKIA_PATH}/tools/ganesh/gl/win/SkWGL_win.cpp
+    )
+else()
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/ports/SkFontHost_FreeType.cpp
+        ${SKIA_PATH}/src/ports/SkFontHost_FreeType_common.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_custom.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_custom_directory.cpp
+    )
+endif()
+
+if(UNIX AND NOT MINGW)
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/ports/SkLog_stdio.cpp
+        ${SKIA_PATH}/src/ports/SkOSFile_posix.cpp
+    )
+endif()
+
+if (APPLE)
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/gpu/ganesh/gl/mac/GrGLMakeNativeInterface_mac.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_mac_ct.cpp
+        ${SKIA_PATH}/src/ports/SkScalerContext_mac_ct.cpp
+        ${SKIA_PATH}/src/ports/SkTypeface_mac_ct.cpp
+        ${SKIA_PATH}/src/utils/SkGetExecutablePath_mac.cpp
+        ${SKIA_PATH}/src/utils/mac/SkCTFont.cpp
+        ${SKIA_PATH}/src/utils/mac/SkCTFontCreateExactCopy.cpp
+        ${SKIA_PATH}/src/utils/mac/SkCreateCGImageRef.cpp
+    )
+endif()
+
+if(LINUX)
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/gpu/ganesh/gl/egl/GrGLMakeEGLInterface.cpp
+        ${SKIA_PATH}/src/gpu/ganesh/gl/egl/GrGLMakeNativeInterface_egl.cpp
+        ${SKIA_PATH}/src/ports/SkFontConfigInterface.cpp
+        ${SKIA_PATH}/src/ports/SkFontConfigInterface_direct.cpp
+        ${SKIA_PATH}/src/ports/SkFontConfigInterface_direct_factory.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_FontConfigInterface.cpp
+        ${SKIA_PATH}/src/ports/SkFontMgr_fontconfig.cpp
+        ${SKIA_PATH}/src/utils/SkGetExecutablePath_linux.cpp
+    )
+endif()
+
+if (EMSCRIPTEN)
+    list(APPEND skia_sources
+        ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleWebGLInterfaceAutogen.cpp
+        ${SKIA_PATH}/src/gpu/ganesh/gl/webgl/GrGLMakeNativeInterface_webgl.cpp
+    )
+endif()
+
+file(GLOB_RECURSE skia_headers
+    ${SKIA_PATH}/src/*.h
+    ${SKIA_PATH}/include/*.h
+)
+
+add_library(skia STATIC ${skia_sources} ${skia_headers})
+
+target_include_directories(skia SYSTEM PUBLIC ${SKIA_PATH}/)
+
+target_compile_definitions(skia PRIVATE SKIA_IMPLEMENTATION=1)
+target_compile_definitions(skia PUBLIC SK_RELEASE)
+target_compile_definitions(skia PUBLIC SK_GANESH)
+target_compile_definitions(skia PRIVATE SKCMS_DISABLE_SKX)
+target_compile_definitions(skia PRIVATE SKCMS_DISABLE_HSW)
+
+if(NOT EMSCRIPTEN)
+    find_package(OpenGL)
+    target_link_libraries(skia PUBLIC OpenGL::GL)
+
+    if(LINUX)
+        target_link_libraries(skia PUBLIC OpenGL::EGL)
+    endif()
+endif()
+
+if(NOT WIN32)
+    find_package(Freetype)
+    if(NOT Freetype_FOUND)
+        FetchContent_Declare(
+            freetype
+            GIT_REPOSITORY https://github.com/freetype/freetype.git
+            GIT_TAG VER-2-14-3
+            GIT_SHALLOW ON
+            GIT_PROGRESS ON
+        )
+
+        set(FT_DISABLE_BROTLI ON CACHE BOOL "" FORCE)
+        set(FT_DISABLE_BZIP2 ON CACHE BOOL "" FORCE)
+        set(FT_DISABLE_PNG ON CACHE BOOL "" FORCE)
+        set(FT_DISABLE_ZLIB ON CACHE BOOL "" FORCE)
+        set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "" FORCE)
+
+        FetchContent_MakeAvailable(freetype)
+        target_link_libraries(skia PRIVATE freetype)
+    else()
+        target_link_libraries(skia PRIVATE Freetype::Freetype)
+    endif()
+endif()
+
+if (WIN32 AND NOT MSVC)
+    add_compile_options(-fms-extensions)
+endif()
+
+if(APPLE)
+    target_link_libraries(skia PRIVATE
+        "-framework CoreText"
+        "-framework CoreGraphics"
+        "-framework Foundation"
+    )
+endif()
+

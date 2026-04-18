@@ -16,6 +16,11 @@
 
 #include "game.h"
 
+#include <include/core/SkCanvas.h>
+#include <include/core/SkFont.h>
+#include <include/core/SkPaint.h>
+#include <include/core/SkSurface.h>
+
 SDL_AppResult Game::init(int /*argc*/, char** /*argv*/)
 {
     SDL_SetWindowMinimumSize(renderer().window(), GAME_WIDTH, GAME_HEIGHT);
@@ -35,7 +40,7 @@ SDL_AppResult Game::update(float dt)
         //
 
         if (inputManager().isKeyDown("W") || inputManager().isMouseBtnDown(1)) {
-            m_player.vel.y = 500;
+            m_player.vel.y = -500;
         }
 
         m_player.update(dt);
@@ -64,15 +69,17 @@ SDL_AppResult Game::update(float dt)
     // RENDER
     //
 
-    root.position.x = -renderer().windowWidth() / 2.F;
-    root.position.y = -renderer().windowHeight() / 2.F;
-
     for (auto& pipe : m_pipes) {
         pipe->render();
     }
 
     m_player.render();
-    root.renderChildren(root.getMatrix(), renderer());
+
+    // m_renderer.drawDebugShape(m_player.hitbox);
+    // for (auto& pipe : m_pipes) {
+    //     m_renderer.drawDebugShape(pipe->hitbox);
+    // }
+    // m_renderer.drawDebugShape(GAME_FLOOR);
 
     return SDL_APP_CONTINUE;
 };
@@ -99,7 +106,7 @@ void Game::addPipe()
             }
         }
 
-        m_pipes.emplace_back(new Pipe(pos, width, height, root));
+        m_pipes.emplace_back(new Pipe(pos, width, height, m_root));
     };
 
     findPipe(
@@ -127,7 +134,7 @@ Player::Player(Container& root) :
 
 void Player::update(float dt)
 {
-    vel.y -= GRAVITY * dt;
+    vel.y += GRAVITY * dt;
 
     Vec2F step = vel * dt;
     hitbox.translate(step);

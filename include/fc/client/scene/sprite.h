@@ -7,12 +7,17 @@
 #pragma once
 
 #include "fc/client/color.h"
-#include "fc/client/render/batcher.h"
 #include "fc/client/scene/container.h"
+
+#include <include/core/SkCanvas.h>
+#include <include/core/SkColorFilter.h>
 
 class SpriteItem : public Container
 {
 public:
+    SpriteItem() : Container()
+    {
+    }
     std::string textureId;
 
     uint32_t width;
@@ -31,15 +36,25 @@ public:
         textureId = id;
     }
 
-    void render(const Matrix3x3& transform, Renderer& renderer) override
-    {
-        auto* texture = renderer.resources().getTexture(textureId);
+    SkPaint paint;
 
-        renderer.batcher().addBatchable(RenderBatcher::TextureBatchable{
-            texture,
-            tint,
-            Matrix3x3{transform}.mulScale({width / 2.F, height / 2.F}),
-            frameOffset,
-        });
+    void render(Renderer::RenderCtx& ctx) override
+    {
+        Texture* texture = ctx.renderer->resources().getTexture(textureId);
+
+        auto color = SkColorSetARGB(alpha * 255, tint.r, tint.g, tint.b);
+        paint.setColorFilter(SkColorFilters::Lighting(color, {}));
+
+        float halfW = ((float)width) / 2.F;
+        float halfH = ((float)height) / 2.F;
+
+        SkRect rect{
+            .fLeft = -halfW,
+            .fTop = -halfH,
+            .fRight = halfW,
+            .fBottom = halfH,
+        };
+
+        ctx.canvas->drawImageRect(texture->image(), rect, texture->sampling, &paint);
     }
 };

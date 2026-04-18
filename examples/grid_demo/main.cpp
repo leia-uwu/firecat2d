@@ -23,7 +23,6 @@ inline constexpr size_t WINDOW_SIZE = GRID_SIZE * ITEM_SIZE;
 class GridSprite : public SpriteItem
 {
 public:
-    GridSprite() : SpriteItem() { };
     Rect hitbox = Rect::fromDims(GRID_SIZE, GRID_SIZE);
 };
 
@@ -71,16 +70,12 @@ public:
 
     SDL_AppResult update(float /*dt*/) override
     {
-        Vec2F center = {WINDOW_SIZE / 2.F, WINDOW_SIZE / 2.F};
-
-        m_root.position = -center;
-
         for (auto& sprite : m_sprites) {
             sprite.tint = 0xffffff;
         }
 
         const std::vector<uint16_t>* query;
-        Vec2 mousePos = {m_inputManager.getMousePos().x, m_renderer.windowHeight() - m_inputManager.getMousePos().y};
+        Vec2 mousePos = {m_inputManager.getMousePos().x, m_inputManager.getMousePos().y};
 
         if (m_queryLine) {
             query = &m_grid.queryLine(m_lineStart, mousePos);
@@ -102,13 +97,10 @@ public:
             m_queryLine = true;
         }
 
-        m_root.renderChildren(m_root.getMatrix(), renderer());
         return SDL_APP_CONTINUE;
     };
 
 private:
-    Container m_root;
-
     bool m_queryLine = true;
 
     Vec2F m_lineStart{WINDOW_SIZE / 2.F, WINDOW_SIZE / 2.F};

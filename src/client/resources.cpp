@@ -106,7 +106,7 @@ void ResourceManager::loadTexture(const char* id, const char* path)
             std::cout << "Failed to load texture " << stbi_failure_reason() << "\n";
         } else {
             texture->generate(width, height, data);
-            stbi_image_free(data);
+            // stbi_image_free(data);
         }
     });
 }

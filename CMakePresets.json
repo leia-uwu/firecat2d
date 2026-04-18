@@ -53,6 +53,9 @@
             "inherits": [
                 "base_dev"
             ],
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "$env{EMSCRIPTEN_ROOT}/cmake/Modules/Platform/Emscripten.cmake"
+            },
             "generator": "Ninja Multi-Config"
         },
         {

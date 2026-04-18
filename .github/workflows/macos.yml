@@ -30,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew update
-          brew install ccache sdl3
+          brew install ccache sdl3 autoconf autoconf-archive automake libtool
 
       - uses: actions/checkout@v4
 
@@ -44,7 +44,8 @@ jobs:
       - name: Configure CMake
         if: ${{ runner.os != 'linux' }}
         run: >
-          cmake -B build -G "Ninja Multi-Config"
+          cmake --preset dev_macos
+          -B build
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_C_COMPILER_LAUNCHER=ccache
@@ -59,8 +60,8 @@ jobs:
 
       - name: Run Tests (Debug)
         working-directory: build
-        run: ctest --build-config Debug
+        run: ctest --output-on-failure --build-config Debug
 
       - name: Run Tests (Release)
         working-directory: build
-        run: ctest --build-config Release
+        run: ctest --output-on-failure --build-config Release

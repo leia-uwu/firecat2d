@@ -6,6 +6,7 @@
 
 #include "fc/client/inputManager.h"
 #include "fc/client/render/renderer.h"
+#include "fc/client/scene/container.h"
 #include "fc/core/ticker.h"
 
 #include <SDL3/SDL_events.h>
@@ -54,6 +55,7 @@ public:
 
 protected:
     Renderer m_renderer;
+    Container m_root;
 
     InputManager m_inputManager;
 

@@ -6,6 +6,11 @@
 
 #include "fc/client/app.h"
 
+#include <include/core/SkCanvas.h>
+#include <include/core/SkFont.h>
+#include <include/core/SkSurface.h>
+#include <include/core/SkTextBlob.h>
+
 SDL_AppResult GameApp::init(int /*argc*/, char** /*argv*/)
 {
     return SDL_APP_CONTINUE;
@@ -27,7 +32,8 @@ SDL_AppResult GameApp::processSDLIterate()
 
     renderer().clear();
 
-    SDL_AppResult result = update(m_ticker.deltaTime());
+    float dt = m_ticker.deltaTime();
+    SDL_AppResult result = update(dt);
 
     if (result != SDL_APP_CONTINUE) {
         return result;
@@ -35,7 +41,20 @@ SDL_AppResult GameApp::processSDLIterate()
 
     inputManager().flush();
 
-    m_renderer.batcher().flushBatch();
+    m_root.updateTransform();
+
+    Renderer::RenderCtx ctx{
+        .renderer = &m_renderer,
+        .canvas = m_renderer.surface()->getCanvas(),
+        .dt = dt,
+    };
+
+    ctx.canvas->save();
+    ctx.canvas->setMatrix(m_root.transform());
+    m_root.renderChildren(ctx);
+    ctx.canvas->restore();
+
+    m_renderer.endFrame();
 
     m_ticker.frameEnd();
 

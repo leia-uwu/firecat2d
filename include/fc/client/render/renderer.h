@@ -7,13 +7,17 @@
 #pragma once
 
 #include "fc/client/color.h"
-#include "fc/client/render/batcher.h"
 #include "fc/client/resources.h"
-
-#include <glad/gl.h>
+#include "fc/core/collision/shape.h"
 
 #include <SDL3/SDL_init.h>
-#include <SDL3/SDL_video.h>
+
+#include <include/core/SkRefCnt.h>
+
+class SkSurface;
+class SkCanvas;
+class GrGLInterface;
+class GrDirectContext;
 
 /**
  * Class to help manage and SDL Window and OpenGL Renderer
@@ -27,6 +31,16 @@ public:
         size_t height = 400;
         bool resizable = true;
         std::string windowTitle = "Game";
+    };
+
+    struct RenderCtx
+    {
+        Renderer* renderer;
+        SkCanvas* canvas;
+        /**
+         * Delta time in seconds
+         */
+        float dt;
     };
 
     Renderer(const InitFlags& flags);
@@ -62,11 +76,6 @@ public:
         return m_resources;
     }
 
-    RenderBatcher& batcher()
-    {
-        return m_batcher;
-    }
-
     Color clearColor()
     {
         return m_clearColor;
@@ -77,7 +86,15 @@ public:
         m_clearColor = color;
     }
 
+    SkSurface* surface()
+    {
+        return m_surface.get();
+    };
+
     void clear();
+    void endFrame();
+
+    void drawDebugShape(const Shape& shape);
 
 private:
     SDL_Window* m_window = nullptr;
@@ -95,6 +112,9 @@ private:
 
     Color m_clearColor;
 
+    sk_sp<const GrGLInterface> m_interface;
+    sk_sp<GrDirectContext> m_context;
+    sk_sp<SkSurface> m_surface;
+
     ResourceManager m_resources;
-    RenderBatcher m_batcher;
 };

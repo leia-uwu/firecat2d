@@ -28,7 +28,7 @@ static const float PIPE_WIDTH = 100;
 static const float PIPE_GAP = 150;
 static const float PIPE_DISTANCE = 400;
 
-static const Rect GAME_FLOOR = Rect::fromDims(GAME_WIDTH, 20, {GAME_WIDTH / 2, -10});
+static const Rect GAME_FLOOR = Rect::fromDims(GAME_WIDTH, 20, {GAME_WIDTH / 2, GAME_HEIGHT + 10});
 
 class Player
 {
@@ -82,11 +82,10 @@ public:
 
     SDL_AppResult init(int argc, char** argv) override;
 
-    Container root;
     SDL_AppResult update(float dt) override;
 
 private:
-    Player m_player{root};
+    Player m_player{m_root};
     std::vector<std::unique_ptr<Pipe>> m_pipes;
     float m_lastPipeDistance = 0;
 
