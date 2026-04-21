@@ -46,12 +46,12 @@ public:
 
     [[nodiscard]] static Vec2 down()
     {
-        return {0, -1};
+        return {0, 1};
     }
 
     [[nodiscard]] static Vec2 up()
     {
-        return {0, 1};
+        return {0, -1};
     }
 
     [[nodiscard]] Vec2 clone() const
@@ -75,9 +75,10 @@ public:
     {
         const VecT cosr = std::cos(rad);
         const VecT sinr = std::sin(rad);
-
-        x = x * cosr - y * sinr;
-        y = x * sinr + y * cosr;
+        float tx = x;
+        float ty = y;
+        x = tx * cosr - ty * sinr;
+        y = tx * sinr + ty * cosr;
 
         return *this;
     }
@@ -152,6 +153,11 @@ public:
     [[nodiscard]] VecT dot(const Vec2& a) const
     {
         return x * a.x + y * a.y;
+    }
+
+    [[nodiscard]] VecT cross(const Vec2& a) const
+    {
+        return x * a.y - y * a.x;
     }
 
     [[nodiscard]] static Vec2 min(const Vec2& a, const Vec2& b)

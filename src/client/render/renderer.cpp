@@ -249,7 +249,9 @@ void Renderer::drawDebugShape(const Shape& shape)
     switch (shape.type) {
     case Shape::CIRCLE: {
         const auto& circle = static_cast<const Circle&>(shape);
-        canvas->drawCircle(circle.pos.x, circle.pos.x, circle.rad, paint);
+        canvas->drawCircle(circle.pos.x, circle.pos.y, circle.rad, paint);
+        Vec2F lineEnd = circle.pos + (Vec2F::right() * circle.rad);
+        canvas->drawLine(circle.pos.x, circle.pos.y, lineEnd.x, lineEnd.y, paint);
         break;
     }
     case Shape::RECT: {
@@ -260,10 +262,19 @@ void Renderer::drawDebugShape(const Shape& shape)
     case Shape::POLYGON: {
         const auto& poly = static_cast<const Polygon&>(shape);
 
-        for (size_t i = 1; i < poly.points.size(); i++) {
-            const Vec2F& prev = poly.points[i - 1];
+        Vec2F center = poly.center();
+
+        canvas->drawPoint(center.x, center.y, paint);
+        for (size_t i = 0, size = poly.points.size(); i < size; i++) {
+            const Vec2F& prev = i == 0 ? poly.points[size - 1] : poly.points[i - 1];
             const Vec2F& cur = poly.points[i];
             canvas->drawLine(prev.x, prev.y, cur.x, cur.y, paint);
+
+            Vec2F mid = (prev + cur) / 2;
+
+            const Vec2F& normal = poly.normals()[i];
+            Vec2F p2 = mid + (normal * 20);
+            canvas->drawLine(mid.x, mid.y, p2.x, p2.y, paint);
         }
         break;
     }

@@ -18,3 +18,5 @@ AddTestFile(BitStreamTest bitStream.test.cpp)
 AddTestFile(GridTest grid.test.cpp)
 
 AddTestFile(idPoolTest idPool.test.cpp)
+
+AddTestFile(shapeTest shapes.test.cpp)

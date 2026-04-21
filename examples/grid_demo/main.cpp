@@ -87,7 +87,7 @@ public:
             m_sprites[id].tint = 0xff0000;
         }
         if (m_inputManager.isMouseBtnDown(1)) {
-            m_lineStart = {m_inputManager.getMousePos().x, m_renderer.windowHeight() - m_inputManager.getMousePos().y};
+            m_lineStart = {m_inputManager.getMousePos().x, m_inputManager.getMousePos().y};
         }
 
         if (m_inputManager.isKeyDown("K") && m_queryLine) {

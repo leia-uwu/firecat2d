@@ -126,7 +126,7 @@ Circle::Circle(const Circle& circ) :
 }
 
 Circle::Circle(Circle&& circ) noexcept :
-    Circle({}, 0)
+    Shape(CIRCLE)
 {
     swap(*this, circ);
 }
@@ -196,7 +196,7 @@ Rect::Rect(const Rect& rect) :
 }
 
 Rect::Rect(Rect&& rect) noexcept :
-    Rect({}, {})
+    Shape(RECT)
 {
     swap(*this, rect);
 }
@@ -258,10 +258,10 @@ std::string Rect::toString() const
 std::vector<Vec2F> Rect::getPoints() const
 {
     return {
-        {max.x, min.y},
-        max,
-        {min.x, max.y},
         min,
+        {min.x, max.y},
+        max,
+        {max.x, min.y},
     };
 }
 
@@ -287,7 +287,7 @@ Polygon::Polygon(const Polygon& poly) : Polygon(poly.points)
 {
 }
 
-Polygon::Polygon(Polygon&& poly) noexcept : Polygon({{}, {}, {}})
+Polygon::Polygon(Polygon&& poly) noexcept : Shape(POLYGON)
 {
     swap(*this, poly);
 }
@@ -315,11 +315,11 @@ Polygon Polygon::fromSides(size_t sides, Vec2F center, float radius)
     float step = (M_PI * 2) / sides;
 
     for (size_t i = 0; i < sides; i++) {
-        float angle = step * i;
+        float angle = M_PI_2 - (step * i);
 
         Vec2F offset = {
             std::cos(angle) * radius,
-            std::sin(angle) * radius
+            std::sin(angle) * radius,
         };
 
         points[i] = center + offset;
@@ -367,7 +367,7 @@ Polygon& Polygon::rotate(float rotation)
     for (auto& point : points) {
         float dist = point.distanceTo(m_center);
 
-        Vec2F dir = (point - m_center).normalize().rotate(rotation).normalize();
+        Vec2F dir = (point - m_center).normalize().rotate(-rotation).normalize();
 
         point = m_center - (dir * dist);
     }
@@ -417,8 +417,7 @@ void Polygon::calculateNormals()
     for (
         size_t i = 0, j = len - 1;
         i < len;
-        j = i++
-    ) {
+        j = i++) {
         Vec2F pointA = points[j];
         Vec2F pointB = points[i];
         Vec2F edge = pointB - pointA;
@@ -431,29 +430,34 @@ void Polygon::calculateNormals()
 {
     float d1 = b.x * a.y + c.x * b.y + a.x * c.y;
     float d2 = a.x * b.y + b.x * c.y + c.x * a.y;
-    // d1 < d2 | counter-clockwise
+    // d1 > d2 | counter-clockwise
     // d1 = d2 | collinear
-    // d1 > d2 | clockwise
-    return d1 < d2;
+    // d1 < d2 | clockwise
+    // note: Y dependent, need to invert this check if Y goes upwards
+    return d1 > d2;
 }
 
 [[nodiscard]] bool Polygon::isConvex(const std::vector<Vec2F>& points)
 {
-    float winding = 0;
     size_t len = points.size();
-    for (
-        size_t i = 0, j = len - 1;
-        i < len;
-        j = i++
-    ) {
-        Vec2F pointA = points[j];
-        Vec2F pointB = points[i];
 
-        winding += (pointB.x - pointA.x) * (pointB.y + pointA.y);
+    int8_t lastCross = 0;
+    for (
+        int i = 0, j = len - 1, k = j - 1;
+        i < len;
+        k = j++, j = i++
+    ) {
+        Vec2F pointA = points[i];
+        Vec2F pointB = points[j];
+        Vec2F pointC = points[k];
+
+        int8_t cross = (pointC - pointB).cross(pointB - pointA) > 0 ? 1 : -1;
+
+        if (i != 0 && cross != lastCross) {
+            return false;
+        }
+        lastCross = cross;
     }
 
-    // winding < 0 | counter-clockwise
-    // winding = 0 | probably self-intersecting
-    // winding > 0 | clockwise
-    return winding < 0;
+    return true;
 }
