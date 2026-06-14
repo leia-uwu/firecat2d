@@ -9,9 +9,8 @@
 #include <regex>
 #include <string>
 
-inline constexpr char CSI = '\x1b';
-inline constexpr std::string CODE_START{CSI, '['};
-inline constexpr std::string CODE_REGEX_START{CSI, '\\', '['};
+const std::string CODE_START{'\x1b', '['};
+const std::string CODE_REGEX_START{'\x1b', '\\', '['};
 
 std::string Formatter::operator()(const std::string& text) const
 {
