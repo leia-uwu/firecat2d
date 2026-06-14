@@ -142,9 +142,7 @@ T BitStream::readBits(uint8_t bitCount)
 {
     assert(bitCount <= (sizeof(T) * 8));
 
-    size_t byteIndex = this->byteIndex();
     size_t bitIndex = this->bitIndex();
-    size_t byteCount = bitCount / 8;
 
     size_t newIndex = (bitIndex + bitCount);
     if (newIndex > this->bitSize()) {
@@ -206,9 +204,7 @@ void BitStream::writeBits(T value, uint8_t bitCount)
 {
     assert(bitCount <= (sizeof(T) * 8));
 
-    size_t byteIndex = this->byteIndex();
     size_t bitIndex = this->bitIndex();
-    size_t byteCount = bitCount / 8;
 
     size_t newIndex = (bitIndex + bitCount);
     if (newIndex > this->bitSize()) {
