@@ -20,10 +20,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-26.04]
         c_compiler: [clang]
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-26.04
             c_compiler: clang
             cpp_compiler: clang++
     env:
@@ -38,13 +38,8 @@ jobs:
           sudo apt -y update
 
           sudo apt -y install build-essential git make \
-          pkg-config cmake ninja-build gnome-desktop-testing libasound2-dev libpulse-dev \
-          libaudio-dev libjack-dev libsndio-dev libx11-dev libxext-dev \
-          libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev \
-          libxkbcommon-dev libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev \
-          libegl1-mesa-dev libdbus-1-dev libibus-1.0-dev libudev-dev \
-          libpipewire-0.3-dev libwayland-dev libdecor-0-dev liburing-dev \
-          sccache lld autoconf autoconf-archive automake libtool fontconfig libfontconfig-dev
+          pkg-config cmake ninja-build sccache lld \
+          libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libsdl3-dev libfontconfig-dev
 
       - name: Setup sccache
         uses: hendrikmuhs/ccache-action@v1.2.20
