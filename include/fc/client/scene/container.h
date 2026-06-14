@@ -30,6 +30,7 @@ public:
     Vec2F position;
     Vec2F scale = {1, 1};
     float rotation = 0;
+    bool visible = true;
 
     void updateTransform()
     {

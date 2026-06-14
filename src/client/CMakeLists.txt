@@ -10,6 +10,8 @@ add_library(
     ./render/texture.cpp
     ./resources.cpp
     ./scene/container.cpp
+    ./scene/sprite.cpp
+    ./scene/text.cpp
 )
 
 target_link_libraries(fc_client fc::core SDL3::SDL3 skia)
@@ -27,5 +29,6 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h
         ${FIRECAT_INCLUDE_DIR}/client/resources.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/container.h
+        ${FIRECAT_INCLUDE_DIR}/client/scene/text.h
 )
 add_library(fc::client ALIAS fc_client)

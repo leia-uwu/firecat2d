@@ -6,10 +6,19 @@
 
 #include "fc/client/resources.h"
 #include "fc/core/buffer.h"
+#include "fc/core/math/vec2.h"
 
 #include <SDL3/SDL_filesystem.h>
+#include <cmath>
 #include <cstdint>
 #include <functional>
+
+#if _WIN32
+#include <include/ports/SkTypeface_win.h>
+#else
+#include <include/core/SkFontMgr.h>
+#include <include/ports/SkFontMgr_directory.h>
+#endif
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
@@ -81,7 +90,16 @@ static void loadFile(const std::string& path, const std::function<void(bool succ
 #endif
 }
 
-void ResourceManager::loadTexture(const char* id, const char* path)
+Resources::Resources()
+{
+#if _WIN32
+    m_fontManager = SkFontMgr_New_DirectWrite();
+#else
+    m_fontManager = SkFontMgr_New_Custom_Directory("data/fonts");
+#endif
+}
+
+void Resources::loadTexture(const char* id, const char* path)
 {
     m_textures[id] = std::make_unique<Texture>();
     Texture* texture = m_textures[id].get();
@@ -111,9 +129,21 @@ void ResourceManager::loadTexture(const char* id, const char* path)
     });
 }
 
-Texture* ResourceManager::getTexture(const std::string& id)
+Texture* Resources::getTexture(const std::string& id)
 {
     assert(m_textures.contains(id));
 
     return m_textures[id].get();
+}
+
+void Resources::loadFont(const char* id, const char* path)
+{
+    m_fonts[id] = m_fontManager->makeFromFile(path);
+}
+
+sk_sp<SkTypeface> Resources::getFont(const std::string& id)
+{
+    assert(m_fonts.contains(id));
+
+    return m_fonts[id];
 }

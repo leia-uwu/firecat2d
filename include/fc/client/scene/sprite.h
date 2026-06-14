@@ -38,23 +38,5 @@ public:
 
     SkPaint paint;
 
-    void render(Renderer::RenderCtx& ctx) override
-    {
-        Texture* texture = ctx.renderer->resources().getTexture(textureId);
-
-        auto color = SkColorSetARGB(alpha * 255, tint.r, tint.g, tint.b);
-        paint.setColorFilter(SkColorFilters::Lighting(color, {}));
-
-        float halfW = ((float)width) / 2.F;
-        float halfH = ((float)height) / 2.F;
-
-        SkRect rect{
-            .fLeft = -halfW,
-            .fTop = -halfH,
-            .fRight = halfW,
-            .fBottom = halfH,
-        };
-
-        ctx.canvas->drawImageRect(texture->image(), rect, texture->sampling, &paint);
-    }
+    void render(Renderer::RenderCtx& ctx) override;
 };

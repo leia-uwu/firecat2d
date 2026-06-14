@@ -10,6 +10,7 @@
 #include "fc/client/scene/container.h"
 #include "fc/client/scene/sprite.h"
 
+#include "fc/client/scene/text.h"
 #include "fc/core/collision/shape.h"
 #include "fc/core/math/vec2.h"
 
@@ -88,6 +89,10 @@ private:
     Player m_player{m_root};
     std::vector<std::unique_ptr<Pipe>> m_pipes;
     float m_lastPipeDistance = 0;
+
+    float m_scoreTicker = 0;
+    int m_score = 0;
+    TextItem m_scoreText;
 
     void addPipe();
 };

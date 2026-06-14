@@ -4,6 +4,7 @@
     SPDX-FileCopyrightText: 2026 firecat2d developers
 */
 
+#include "fc/client/resources.h"
 #define SDL_MAIN_USE_CALLBACKS
 
 #include <SDL3/SDL_init.h>
@@ -38,7 +39,7 @@ public:
 
     SDL_AppResult init(int /*argc*/, char** /*argv*/) override
     {
-        renderer().resources().loadTexture("bird", "assets/bird.png");
+        Resources::get().loadTexture("bird", "assets/bird.png");
 
         for (auto& sprite : m_sprites) {
             sprite.setTexture("bird");

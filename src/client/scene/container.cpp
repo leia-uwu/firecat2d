@@ -87,13 +87,14 @@ void Container::renderChildren(Renderer::RenderCtx& ctx)
     }
 
     for (Container* child : m_children) {
-        Renderer::RenderCtx childCtx = ctx;
-
+        if (!child->visible) {
+            continue;
+        }
         child->updateTransform();
 
         ctx.canvas->save();
         ctx.canvas->concat(child->transform());
-        child->renderChildren(childCtx);
+        child->renderChildren(ctx);
 
         child->render(ctx);
         ctx.canvas->restore();

@@ -11,6 +11,7 @@
 
 #include <cstdlib>
 
+#include "fc/client/resources.h"
 #include "fc/core/collision/collision.h"
 #include "fc/core/collision/shape.h"
 
@@ -26,8 +27,19 @@ SDL_AppResult Game::init(int /*argc*/, char** /*argv*/)
     SDL_SetWindowMinimumSize(renderer().window(), GAME_WIDTH, GAME_HEIGHT);
     renderer().setClearColor(0x141414);
 
-    renderer().resources().loadTexture("bird", "assets/bird.png");
-    renderer().resources().loadTexture("pipe", "assets/pipe.png");
+    Resources::get().loadTexture("bird", "assets/bird.png");
+    Resources::get().loadTexture("pipe", "assets/pipe.png");
+
+    m_root.addChild(&m_scoreText);
+
+    m_scoreText.setZIndex(99);
+    m_scoreText.font().setTypeface(Resources::get().getFont("Inter"));
+    m_scoreText.font().setSize(25);
+    m_scoreText.fillPaint().setColor(0xffff0000);
+    m_scoreText.strokePaint().setStrokeWidth(4);
+    m_scoreText.strokePaint().setColor(0xffffffff);
+    m_scoreText.setText("Score - 0");
+    m_scoreText.position = {10, 20};
 
     return SDL_APP_CONTINUE;
 }
@@ -63,6 +75,13 @@ SDL_AppResult Game::update(float dt)
                 // m_player.hitbox.translate(res.normal * -res.depth);
                 m_player.sprite.tint = 0xff0000;
             }
+        }
+
+        m_scoreTicker += dt;
+        if (m_scoreTicker >= 1) {
+            m_scoreTicker = 0;
+            m_score++;
+            m_scoreText.setText(std::format("Score - {}", m_score));
         }
     }
     //

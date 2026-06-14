@@ -5,6 +5,7 @@
 */
 
 #include "fc/client/render/renderer.h"
+#include "fc/client/resources.h"
 #include "fc/core/collision/shape.h"
 
 #include <SDL3/SDL_init.h>
@@ -16,6 +17,7 @@
 
 #include <include/core/SkCanvas.h>
 #include <include/core/SkColorSpace.h>
+#include <include/core/SkFontMgr.h>
 #include <include/core/SkSurface.h>
 #include <include/gpu/ganesh/GrBackendSurface.h>
 #include <include/gpu/ganesh/GrDirectContext.h>
@@ -153,6 +155,9 @@ SDL_AppResult Renderer::init()
     }
 
     resize();
+
+    // TODO
+    Resources::get().loadFont("Inter", "/usr/share/fonts/inter/InterVariable.ttf");
 
     return SDL_APP_CONTINUE;
 }

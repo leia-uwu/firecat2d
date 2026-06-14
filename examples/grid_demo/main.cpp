@@ -5,6 +5,7 @@
 */
 
 #include "fc/client/app.h"
+#include "fc/client/resources.h"
 #include "fc/client/scene/sprite.h"
 #include "fc/core/collision/grid.h"
 #include "fc/core/collision/shape.h"
@@ -41,7 +42,7 @@ public:
 
     SDL_AppResult init(int /*argc*/, char** /*argv*/) override
     {
-        renderer().resources().loadTexture("bird", "assets/bird.png");
+        Resources::get().loadTexture("bird", "assets/bird.png");
 
         for (size_t i = 0, y = 0, x = 0; i < m_sprites.size(); i++) {
             GridSprite& sprite = m_sprites[i];

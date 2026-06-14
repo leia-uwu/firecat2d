@@ -7,7 +7,6 @@
 #pragma once
 
 #include "fc/client/color.h"
-#include "fc/client/resources.h"
 #include "fc/core/collision/shape.h"
 
 #include <SDL3/SDL_init.h>
@@ -71,11 +70,6 @@ public:
     void setResizable(bool resizable);
     [[nodiscard]] bool focused() const;
 
-    ResourceManager& resources()
-    {
-        return m_resources;
-    }
-
     Color clearColor()
     {
         return m_clearColor;
@@ -115,6 +109,4 @@ private:
     sk_sp<const GrGLInterface> m_interface;
     sk_sp<GrDirectContext> m_context;
     sk_sp<SkSurface> m_surface;
-
-    ResourceManager m_resources;
 };
