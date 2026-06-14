@@ -9,6 +9,7 @@
 // reference: https://en.wikipedia.org/wiki/ANSI_escape_code
 // inspired by https://github.com/chalk/chalk
 
+#include <cstdint>
 #include <memory>
 #include <string>
 
