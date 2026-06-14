@@ -7,6 +7,7 @@
 #include "fc/core/collision/shape.h"
 #include "fc/core/math/gmath.h"
 
+#include <array>
 #include <cfloat>
 #include <numbers>
 
