@@ -5,8 +5,10 @@
 */
 
 #include "fc/core/collision/shape.h"
+#include "fc/core/math/gmath.h"
 
 #include <cfloat>
+#include <numbers>
 
 using CollisionFn = bool (*)(const Shape&, const Shape&, Collision::Response*);
 
@@ -312,10 +314,10 @@ Polygon Polygon::fromSides(size_t sides, Vec2F center, float radius)
     std::vector<Vec2F> points;
     points.resize(sides);
 
-    float step = (M_PI * 2) / sides;
+    float step = (std::numbers::pi * 2) / sides;
 
     for (size_t i = 0; i < sides; i++) {
-        float angle = M_PI_2 - (step * i);
+        float angle = GMath::PI_2 - (step * i);
 
         Vec2F offset = {
             std::cos(angle) * radius,
