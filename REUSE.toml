@@ -16,6 +16,11 @@ SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
+path = "examples/pnpm-workspace.yaml"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
 path = "lib/include/doctest/doctest.h"
 SPDX-License-Identifier = "MIT"
 
