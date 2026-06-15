@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2026 firecat2d developers
 
-add_library(doctest SHARED docTest.cpp)
+add_library(doctest STATIC docTest.cpp)
 
 macro(AddTestFile test_name test_file)
     add_executable(${test_name} ${test_file})
