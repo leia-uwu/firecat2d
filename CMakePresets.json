@@ -59,17 +59,18 @@
             "generator": "Ninja Multi-Config"
         },
         {
-            "name": "dev_mingw",
-            "displayName": "Mingw Dev",
+            "name": "dev_xwin_clang_cl",
+            "displayName": "Clang CL with xwin",
+            "description": "For cross compiling to windows on linux",
             "hidden": false,
-            "binaryDir": "build_mingw",
-            "installDir": "install_mingw",
+            "binaryDir": "build_xwin",
+            "installDir": "install_xwin",
             "inherits": [
                 "base_dev"
             ],
             "environment": {
-                "$comment": "i have mold on my LDFLAGS globally but that breaks mingw :)",
-                "LDFLAGS": ""
+                "XWIN_DIR": "${sourceDir}/.xwin",
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/xwin-clang-cl.cmake"
             },
             "generator": "Ninja Multi-Config"
         }
@@ -115,12 +116,12 @@
             "configurePreset": "dev_wasm"
         },
         {
-            "name": "dev_mingw",
-            "displayName": "Mingw Dev",
+            "name": "dev_xwin_clang_cl",
+            "displayName": "Clang CL with xwin",
             "inherits": [
                 "base_dev"
             ],
-            "configurePreset": "dev_wasm"
+            "configurePreset": "dev_xwin_clang_cl"
         }
     ]
 }

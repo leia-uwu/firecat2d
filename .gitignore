@@ -19,5 +19,8 @@ _deps/
 node_modules/
 *wasm-build*
 
+.xwin/
+.xwin-cache/
+
 # temp files ending with ~
 *~
