@@ -29,7 +29,6 @@ Vec2F InputManager::getWheelDelta() const
 void InputManager::processSDLEvent(SDL_Event* event)
 {
     switch (event->type) {
-    case SDL_EVENT_WINDOW_RESIZED:
     case SDL_EVENT_KEY_DOWN:
         m_keys.insert_or_assign(SDL_GetKeyName(event->key.key), true);
         break;
