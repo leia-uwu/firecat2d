@@ -1,13 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2026 firecat2d developers
 
-set(
-    FLAPPY_SRC
-    src/main.cpp
-    src/game.cpp
-)
-
-add_executable(flappy_bird ${FLAPPY_SRC})
+add_executable(flappy_bird flappyBird.cpp)
 
 target_link_libraries(
     flappy_bird
