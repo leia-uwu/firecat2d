@@ -19,8 +19,6 @@ include(FetchContent)
 # cmake not printing anything for what could take more than a minute is cringe
 # idk why its quiet by default...
 set(FETCHCONTENT_QUIET OFF)
-# so it doesn't redownload all the deps if the build directory is nuked
-set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/_deps")
 
 # set the output directory for built objects.
 # This makes sure that the dynamic library goes into the build directory automatically.
