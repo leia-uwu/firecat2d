@@ -40,6 +40,14 @@ install(
     examples/assets
 )
 
+install(
+    FILES
+    public/fonts/Roboto-Variable.ttf
+    public/fonts/RobotoMono-Variable.ttf
+    DESTINATION
+    examples/fonts
+)
+
 add_subdirectory(flappy_bird)
 add_subdirectory(spritebenchmark)
 add_subdirectory(grid_demo)

@@ -8,6 +8,7 @@ add_library(
     ./inputManager.cpp
     ./render/renderer.cpp
     ./render/texture.cpp
+    ./render/typeFace.cpp
     ./resources.cpp
     ./scene/container.cpp
     ./scene/sprite.cpp
@@ -27,6 +28,7 @@ target_sources(
         ${FIRECAT_INCLUDE_DIR}/client/color.h
         ${FIRECAT_INCLUDE_DIR}/client/inputManager.h
         ${FIRECAT_INCLUDE_DIR}/client/render/texture.h
+        ${FIRECAT_INCLUDE_DIR}/client/render/typeFace.h
         ${FIRECAT_INCLUDE_DIR}/client/resources.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/container.h
         ${FIRECAT_INCLUDE_DIR}/client/scene/text.h

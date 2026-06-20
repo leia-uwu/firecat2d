@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "fc/client/render/typeFace.h"
 #include "fc/client/scene/container.h"
 
 #include <cstdint>
@@ -35,6 +36,16 @@ public:
     void setText(const std::string& text)
     {
         m_text = text;
+    }
+
+    TypeFace* typeFace()
+    {
+        return m_typeFace;
+    }
+
+    void setTypeFace(TypeFace* typeFace)
+    {
+        m_typeFace = typeFace;
     }
 
     [[nodiscard]] SkFont& font()
@@ -82,10 +93,12 @@ public:
         m_strokePaint = paint;
     }
 
+    float getWidth();
+
     void render(Renderer::RenderCtx& ctx) override;
 
 private:
-    sk_sp<SkTypeface> m_typeFace;
+    TypeFace* m_typeFace;
     SkFont m_font;
 
     PaintOrder m_paintOrder = STROKE_FILL;

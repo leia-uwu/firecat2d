@@ -15,6 +15,7 @@
 #include <include/core/SkTypeface.h>
 
 #include "fc/client/render/texture.h"
+#include "fc/client/render/typeFace.h"
 
 class Resources
 {
@@ -23,9 +24,9 @@ public:
 
     [[nodiscard]] Texture* getTexture(const std::string& id);
 
-    void loadFont(const char* id, const char* path);
+    void loadTypeFace(const char* id, const char* path);
 
-    [[nodiscard]] sk_sp<SkTypeface> getFont(const std::string& id);
+    [[nodiscard]] TypeFace* getTypeFace(const std::string& id);
 
     static Resources& get()
     {
@@ -33,11 +34,16 @@ public:
         return r;
     };
 
+    sk_sp<SkFontMgr> fontManager()
+    {
+        return m_fontManager;
+    }
+
 private:
     Resources();
 
     std::unordered_map<std::string, std::unique_ptr<Texture>> m_textures;
 
     sk_sp<SkFontMgr> m_fontManager;
-    std::unordered_map<std::string, sk_sp<SkTypeface>> m_fonts;
+    std::unordered_map<std::string, std::unique_ptr<TypeFace>> m_typeFaces;
 };

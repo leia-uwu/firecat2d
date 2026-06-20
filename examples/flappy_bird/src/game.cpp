@@ -32,8 +32,10 @@ SDL_AppResult Game::init(int /*argc*/, char** /*argv*/)
 
     m_root.addChild(&m_scoreText);
 
+    Resources::get().loadTypeFace("Roboto", "fonts/Roboto-Variable.ttf");
+
     m_scoreText.setZIndex(99);
-    m_scoreText.font().setTypeface(Resources::get().getFont("Inter"));
+    m_scoreText.setTypeFace(Resources::get().getTypeFace("Roboto"));
     m_scoreText.font().setSize(25);
     m_scoreText.fillPaint().setColor(0xffff0000);
     m_scoreText.strokePaint().setStrokeWidth(4);

@@ -5,13 +5,15 @@
 */
 
 #include "fc/client/resources.h"
+#include "fc/client/render/typeFace.h"
 #include "fc/core/buffer.h"
-#include "fc/core/math/vec2.h"
 
 #include <SDL3/SDL_filesystem.h>
-#include <cmath>
 #include <cstdint>
+#include <cstring>
 #include <functional>
+#include <include/core/SkData.h>
+#include <memory>
 
 #if _WIN32
 #include <include/ports/SkTypeface_win.h>
@@ -99,16 +101,23 @@ Resources::Resources()
 #endif
 }
 
-void Resources::loadTexture(const char* id, const char* path)
+static std::string getPath(const char* path)
 {
-    m_textures[id] = std::make_unique<Texture>();
-    Texture* texture = m_textures[id].get();
 #ifndef __EMSCRIPTEN__
     std::string filePath = SDL_GetBasePath();
 #else
     std::string filePath = "./";
 #endif
     filePath += path;
+    return filePath;
+}
+
+void Resources::loadTexture(const char* id, const char* path)
+{
+    m_textures[id] = std::make_unique<Texture>();
+    Texture* texture = m_textures[id].get();
+
+    std::string filePath = getPath(path);
 
     loadFile(filePath, [texture, this](bool success, Uint8Buffer buffer) {
         if (!success)
@@ -124,7 +133,6 @@ void Resources::loadTexture(const char* id, const char* path)
             std::cout << "Failed to load texture " << stbi_failure_reason() << "\n";
         } else {
             texture->generate(width, height, data);
-            // stbi_image_free(data);
         }
     });
 }
@@ -136,14 +144,22 @@ Texture* Resources::getTexture(const std::string& id)
     return m_textures[id].get();
 }
 
-void Resources::loadFont(const char* id, const char* path)
+void Resources::loadTypeFace(const char* id, const char* path)
 {
-    m_fonts[id] = m_fontManager->makeFromFile(path);
+    m_typeFaces[id] = std::make_unique<TypeFace>();
+
+    std::string filePath = getPath(path);
+    loadFile(filePath, [this, id](bool success, Uint8Buffer buffer) {
+        if (!success)
+            return;
+
+        m_typeFaces[id]->load(buffer);
+    });
 }
 
-sk_sp<SkTypeface> Resources::getFont(const std::string& id)
+TypeFace* Resources::getTypeFace(const std::string& id)
 {
-    assert(m_fonts.contains(id));
+    assert(m_typeFaces.contains(id));
 
-    return m_fonts[id];
+    return m_typeFaces[id].get();
 }

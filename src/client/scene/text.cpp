@@ -12,11 +12,16 @@ void TextItem::render(Renderer::RenderCtx& ctx)
 {
     SkPaint& first = m_paintOrder == STROKE_FILL ? m_strokePaint : m_fillPaint;
     SkPaint& second = m_paintOrder == STROKE_FILL ? m_fillPaint : m_strokePaint;
+
+    if (m_font.getTypeface() != m_typeFace->typeFace().get()) {
+        m_font.setTypeface(m_typeFace->typeFace());
+    }
+
     if (first.getAlphaf() > 0.F) {
         ctx.canvas->drawSimpleText(
             m_text.c_str(), m_text.size(),
             SkTextEncoding::kUTF8,
-            position.x, position.y,
+            0, 0,
             m_font, first
         );
     }
@@ -25,8 +30,34 @@ void TextItem::render(Renderer::RenderCtx& ctx)
         ctx.canvas->drawSimpleText(
             m_text.c_str(), m_text.size(),
             SkTextEncoding::kUTF8,
-            position.x, position.y,
+            0, 0,
             m_font, second
         );
     }
+}
+
+float TextItem::getWidth()
+{
+    float width = 0;
+
+    if (m_fillPaint.getAlphaf() > 0.F) {
+        width = m_font.measureText(
+            m_text.data(), m_text.size(),
+            SkTextEncoding::kUTF8,
+            nullptr,
+            &m_fillPaint
+        );
+    }
+
+    if (m_strokePaint.getAlphaf() > 0.F) {
+        float strokeWidth = m_font.measureText(
+            m_text.data(), m_text.size(),
+            SkTextEncoding::kUTF8,
+            nullptr,
+            &m_strokePaint
+        );
+        width = std::max(width, strokeWidth);
+    }
+
+    return width;
 }
