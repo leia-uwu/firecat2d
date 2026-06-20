@@ -26,13 +26,13 @@ jobs:
       env:
         EMSCRIPTEN_ROOT: "/usr/lib/emscripten"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install dependencies
         run: pacman -Syu --noconfirm cmake make git pkgconf emscripten sccache ninja pnpm
 
       - name: Setup sccache
-        uses: hendrikmuhs/ccache-action@v1.2.20
+        uses: hendrikmuhs/ccache-action@v1.2.23
         with:
           create-symlink: true
           variant: sccache
@@ -55,15 +55,15 @@ jobs:
 
       - name: Setup Pages
         if: github.ref == 'refs/heads/master'
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
         if: github.ref == 'refs/heads/master'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "./examples/dist"
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
