@@ -3,7 +3,8 @@
 
 FetchContent_Declare(
     skia_src
-    URL https://github.com/google/skia/archive/refs/heads/chrome/m150.zip
+    URL https://github.com/google/skia/archive/14d05ec761901b6e9e9193af8b347ab3a7f6fed0.zip
+    URL_HASH SHA256=84a66fa0056083a7a489c2e6367c4ef1d3b8d2cacdccfb413e7d7913128b2672
 )
 FetchContent_MakeAvailable(skia_src)
 
