@@ -6,6 +6,7 @@
 
 #include "fc/client/inputManager.h"
 #include "fc/client/render/renderer.h"
+#include "fc/client/resources.h"
 #include "fc/client/scene/container.h"
 #include "fc/core/ticker.h"
 
@@ -18,6 +19,7 @@ class GameApp
 public:
     GameApp(const Renderer::InitFlags& flags) : m_renderer(flags)
     {
+        Resources::get().loadTypeFace("Roboto", "fonts/Roboto-Variable.ttf");
     }
     virtual SDL_AppResult init(int argc, char** argv);
 

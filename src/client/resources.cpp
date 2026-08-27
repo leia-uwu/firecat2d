@@ -99,6 +99,8 @@ Resources::Resources()
 #else
     m_fontManager = SkFontMgr_New_Custom_Directory("data/fonts");
 #endif
+    m_fontCollection = sk_make_sp<skia::textlayout::FontCollection>();
+    m_fontCollection->setDefaultFontManager(m_fontManager, "Roboto");
 }
 
 static std::string getPath(const char* path)

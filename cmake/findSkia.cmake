@@ -815,6 +815,28 @@ set(skia_sources
 
     ${SKIA_PATH}/modules/skcms/skcms.cc
     ${SKIA_PATH}/modules/skcms/src/skcms_TransformBaseline.cc
+
+    ${SKIA_PATH}/modules/skshaper/src/SkShaper.cpp
+    ${SKIA_PATH}/modules/skshaper/src/SkShaper_factory.cpp
+    ${SKIA_PATH}/modules/skshaper/src/SkShaper_harfbuzz.cpp
+    ${SKIA_PATH}/modules/skshaper/src/SkShaper_primitive.cpp
+    ${SKIA_PATH}/modules/skshaper/src/SkShaper_skunicode.cpp
+
+    ${SKIA_PATH}/modules/skparagraph/src/Decorations.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/FontArguments.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/FontCollection.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/OneLineShaper.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/ParagraphBuilderImpl.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/ParagraphCache.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/ParagraphImpl.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/ParagraphPainterImpl.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/ParagraphStyle.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/Run.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/TextLine.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/TextShadow.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/TextStyle.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/TextWrapper.cpp
+    ${SKIA_PATH}/modules/skparagraph/src/TypefaceFontProvider.cpp
 )
 
 if (WIN32)
@@ -899,6 +921,8 @@ target_compile_definitions(skia PUBLIC SK_RELEASE)
 target_compile_definitions(skia PUBLIC SK_GANESH)
 target_compile_definitions(skia PRIVATE SKCMS_DISABLE_SKX)
 target_compile_definitions(skia PRIVATE SKCMS_DISABLE_HSW)
+target_compile_definitions(skia PRIVATE SK_SHAPER_HARFBUZZ_AVAILABLE)
+target_compile_definitions(skia PRIVATE SK_SHAPER_UNICODE_AVAILABLE)
 
 if(NOT EMSCRIPTEN)
     find_package(OpenGL)
@@ -907,30 +931,25 @@ if(NOT EMSCRIPTEN)
     if(LINUX)
         target_link_libraries(skia PUBLIC OpenGL::EGL)
     endif()
-endif()
 
-if(NOT WIN32)
-    find_package(Freetype)
-    if(NOT Freetype_FOUND)
-        FetchContent_Declare(
-            freetype
-            GIT_REPOSITORY https://github.com/freetype/freetype.git
-            GIT_TAG VER-2-14-3
-            GIT_SHALLOW ON
-            GIT_PROGRESS ON
-        )
+    FetchContent_Declare(
+        harfbuzz
+        URL https://github.com/harfbuzz/harfbuzz/releases/download/14.6.0/harfbuzz-14.6.0.tar.xz
+        URL_HASH SHA256=d07a007327277708a2a73ae437887cdbaf282937f6d03ca5467723e9099af586
+    )
+    FetchContent_MakeAvailable(harfbuzz)
 
-        set(FT_DISABLE_BROTLI ON CACHE BOOL "" FORCE)
-        set(FT_DISABLE_BZIP2 ON CACHE BOOL "" FORCE)
-        set(FT_DISABLE_PNG ON CACHE BOOL "" FORCE)
-        set(FT_DISABLE_ZLIB ON CACHE BOOL "" FORCE)
-        set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "" FORCE)
+    FetchContent_Declare(
+        freetype
+        URL https://github.com/freetype/freetype/archive/refs/tags/VER-2-14-3.tar.gz
+        URL_HASH SHA256=dc49de6b01a266eef4876a4dd34d9842c475d3e28ff2eff63bd2fb760ab56261
+    )
+    FetchContent_MakeAvailable(freetype)
 
-        FetchContent_MakeAvailable(freetype)
-        target_link_libraries(skia PRIVATE freetype)
-    else()
-        target_link_libraries(skia PRIVATE Freetype::Freetype)
-    endif()
+    target_link_libraries(skia PUBLIC freetype harfbuzz)
+else()
+    target_compile_options(skia PRIVATE --use-port=zlib --use-port=harfbuzz --use-port=freetype)
+    target_link_libraries(skia PRIVATE z harfbuzz freetype)
 endif()
 
 if (WIN32 AND NOT MSVC)

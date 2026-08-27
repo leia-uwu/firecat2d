@@ -154,8 +154,6 @@ public:
         m_root.addChild(&m_scoreText);
         m_root.addChild(&m_titleText);
 
-        Resources::get().loadTypeFace("Roboto", "fonts/Roboto-Variable.ttf");
-
         m_titleText.visible = true;
         m_titleText.setZIndex(100);
         m_titleText.setTypeFace(Resources::get().getTypeFace("Roboto"));
