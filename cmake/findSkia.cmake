@@ -3,7 +3,8 @@
 
 FetchContent_Declare(
     skia_src
-    URL https://github.com/google/skia/archive/14d05ec761901b6e9e9193af8b347ab3a7f6fed0.zip
+    URL
+        https://github.com/google/skia/archive/14d05ec761901b6e9e9193af8b347ab3a7f6fed0.zip
     URL_HASH SHA256=84a66fa0056083a7a489c2e6367c4ef1d3b8d2cacdccfb413e7d7913128b2672
 )
 FetchContent_MakeAvailable(skia_src)
@@ -36,11 +37,9 @@ set(skia_sources
     ${SKIA_PATH}/src/base/SkTime.cpp
     ${SKIA_PATH}/src/base/SkUTF.cpp
     ${SKIA_PATH}/src/base/SkUtils.cpp
-
     ${SKIA_PATH}/src/capture/SkCapture.cpp
     ${SKIA_PATH}/src/capture/SkCaptureCanvas.cpp
     ${SKIA_PATH}/src/capture/SkCaptureManager.cpp
-
     ${SKIA_PATH}/src/core/SkAAClip.cpp
     ${SKIA_PATH}/src/core/SkATrace.cpp
     ${SKIA_PATH}/src/core/SkAlphaRuns.cpp
@@ -246,7 +245,6 @@ set(skia_sources
     ${SKIA_PATH}/src/core/SkYUVAPixmaps.cpp
     ${SKIA_PATH}/src/core/SkYUVMath.cpp
     ${SKIA_PATH}/src/core/SkYUVPlanesCache.cpp
-
     ${SKIA_PATH}/src/effects/Sk1DPathEffect.cpp
     ${SKIA_PATH}/src/effects/Sk2DPathEffect.cpp
     ${SKIA_PATH}/src/effects/SkBlenders.cpp
@@ -287,10 +285,8 @@ set(skia_sources
     ${SKIA_PATH}/src/effects/imagefilters/SkPictureImageFilter.cpp
     ${SKIA_PATH}/src/effects/imagefilters/SkRuntimeImageFilter.cpp
     ${SKIA_PATH}/src/effects/imagefilters/SkShaderImageFilter.cpp
-
     ${SKIA_PATH}/src/encode/SkEncoder.cpp
     ${SKIA_PATH}/src/encode/SkICC.cpp
-
     ${SKIA_PATH}/src/gpu/Blend.cpp
     ${SKIA_PATH}/src/gpu/BlendFormula.cpp
     ${SKIA_PATH}/src/gpu/BlurUtils.cpp
@@ -545,14 +541,11 @@ set(skia_sources
     ${SKIA_PATH}/src/gpu/ganesh/text/GlyphData.cpp
     ${SKIA_PATH}/src/gpu/ganesh/text/GrAtlasManager.cpp
     ${SKIA_PATH}/src/gpu/ganesh/text/TextStrike.cpp
-
     ${SKIA_PATH}/src/gpu/tessellate/FixedCountBufferUtils.cpp
     ${SKIA_PATH}/src/gpu/tessellate/Tessellation.cpp
-
     ${SKIA_PATH}/src/gpu/DitherUtils.cpp
     ${SKIA_PATH}/src/gpu/RectanizerPow2.cpp
     ${SKIA_PATH}/src/gpu/Swizzle.cpp
-
     ${SKIA_PATH}/src/image/SkImage.cpp
     ${SKIA_PATH}/src/image/SkImage_Base.cpp
     ${SKIA_PATH}/src/image/SkImage_Lazy.cpp
@@ -567,13 +560,10 @@ set(skia_sources
     ${SKIA_PATH}/src/image/SkSurface_Null.cpp
     ${SKIA_PATH}/src/image/SkSurface_Raster.cpp
     ${SKIA_PATH}/src/image/SkTiledImageUtils.cpp
-
     ${SKIA_PATH}/src/lazy/SkDiscardableMemoryPool.cpp
-
     ${SKIA_PATH}/src/opts/SkOpts_lasx.cpp
     ${SKIA_PATH}/src/opts/SkOpts_ml3.cpp
     ${SKIA_PATH}/src/opts/SkOpts_ml4.cpp
-
     ${SKIA_PATH}/src/pathops/SkAddIntersections.cpp
     ${SKIA_PATH}/src/pathops/SkDConicLineIntersection.cpp
     ${SKIA_PATH}/src/pathops/SkDCubicLineIntersection.cpp
@@ -606,7 +596,6 @@ set(skia_sources
     ${SKIA_PATH}/src/pathops/SkPathOpsWinding.cpp
     ${SKIA_PATH}/src/pathops/SkPathWriter.cpp
     ${SKIA_PATH}/src/pathops/SkReduceOrder.cpp
-
     ${SKIA_PATH}/src/shaders/SkBitmapProcShader.cpp
     ${SKIA_PATH}/src/shaders/SkBlendShader.cpp
     ${SKIA_PATH}/src/shaders/SkColorFilterShader.cpp
@@ -629,7 +618,6 @@ set(skia_sources
     ${SKIA_PATH}/src/shaders/gradients/SkLinearGradient.cpp
     ${SKIA_PATH}/src/shaders/gradients/SkRadialGradient.cpp
     ${SKIA_PATH}/src/shaders/gradients/SkSweepGradient.cpp
-
     ${SKIA_PATH}/src/sksl/SkSLBuiltinTypes.cpp
     ${SKIA_PATH}/src/sksl/SkSLCompiler.cpp
     ${SKIA_PATH}/src/sksl/SkSLConstantFolder.cpp
@@ -643,7 +631,6 @@ set(skia_sources
     ${SKIA_PATH}/src/sksl/SkSLPool.cpp
     ${SKIA_PATH}/src/sksl/SkSLSampleUsage.cpp
     ${SKIA_PATH}/src/sksl/SkSLUtil.cpp
-
     ${SKIA_PATH}/src/sksl/analysis/SkSLCanExitWithoutReturningValue.cpp
     ${SKIA_PATH}/src/sksl/analysis/SkSLCheckProgramStructure.cpp
     ${SKIA_PATH}/src/sksl/analysis/SkSLCheckSymbolTableCorrectness.cpp
@@ -661,12 +648,10 @@ set(skia_sources
     ${SKIA_PATH}/src/sksl/analysis/SkSLSpecialization.cpp
     ${SKIA_PATH}/src/sksl/analysis/SkSLSwitchCaseContainsExit.cpp
     ${SKIA_PATH}/src/sksl/analysis/SkSLSymbolTableStackBuilder.cpp
-
     ${SKIA_PATH}/src/sksl/codegen/SkSLGLSLCodeGenerator.cpp
     ${SKIA_PATH}/src/sksl/codegen/SkSLPipelineStageCodeGenerator.cpp
     ${SKIA_PATH}/src/sksl/codegen/SkSLRasterPipelineBuilder.cpp
     ${SKIA_PATH}/src/sksl/codegen/SkSLRasterPipelineCodeGenerator.cpp
-
     ${SKIA_PATH}/src/sksl/ir/SkSLBinaryExpression.cpp
     ${SKIA_PATH}/src/sksl/ir/SkSLBlock.cpp
     ${SKIA_PATH}/src/sksl/ir/SkSLChildCall.cpp
@@ -713,17 +698,14 @@ set(skia_sources
     ${SKIA_PATH}/src/sksl/ir/SkSLVarDeclarations.cpp
     ${SKIA_PATH}/src/sksl/ir/SkSLVariable.cpp
     ${SKIA_PATH}/src/sksl/ir/SkSLVariableReference.cpp
-
     ${SKIA_PATH}/src/sksl/lex/Main.cpp
     ${SKIA_PATH}/src/sksl/lex/NFA.cpp
     ${SKIA_PATH}/src/sksl/lex/RegexNode.cpp
     ${SKIA_PATH}/src/sksl/lex/RegexParser.cpp
     ${SKIA_PATH}/src/sksl/lex/TransitionTable.cpp
-
     ${SKIA_PATH}/src/sksl/tracing/SkSLDebugTracePlayer.cpp
     ${SKIA_PATH}/src/sksl/tracing/SkSLDebugTracePriv.cpp
     ${SKIA_PATH}/src/sksl/tracing/SkSLTraceHook.cpp
-
     ${SKIA_PATH}/src/sksl/transform/SkSLAddConstToVarModifiers.cpp
     ${SKIA_PATH}/src/sksl/transform/SkSLEliminateDeadFunctions.cpp
     ${SKIA_PATH}/src/sksl/transform/SkSLEliminateDeadGlobalVariables.cpp
@@ -740,7 +722,6 @@ set(skia_sources
     ${SKIA_PATH}/src/sksl/transform/SkSLReplaceSplatCastsWithSwizzles.cpp
     ${SKIA_PATH}/src/sksl/transform/SkSLRewriteIndexedSwizzle.cpp
     ${SKIA_PATH}/src/sksl/transform/SkSLTransform.cpp
-
     ${SKIA_PATH}/src/sksl/SkSLAnalysis.cpp
     ${SKIA_PATH}/src/sksl/SkSLErrorReporter.cpp
     ${SKIA_PATH}/src/sksl/SkSLIntrinsicList.cpp
@@ -750,7 +731,6 @@ set(skia_sources
     ${SKIA_PATH}/src/sksl/SkSLParser.cpp
     ${SKIA_PATH}/src/sksl/SkSLPosition.cpp
     ${SKIA_PATH}/src/sksl/SkSLString.cpp
-
     ${SKIA_PATH}/src/text/GlyphRun.cpp
     ${SKIA_PATH}/src/text/SlugFromBuffer.cpp
     ${SKIA_PATH}/src/text/StrikeForGPU.cpp
@@ -767,7 +747,6 @@ set(skia_sources
     ${SKIA_PATH}/src/text/gpu/TextBlob.cpp
     ${SKIA_PATH}/src/text/gpu/TextBlobRedrawCoordinator.cpp
     ${SKIA_PATH}/src/text/gpu/VertexFiller.cpp
-
     ${SKIA_PATH}/src/utils/SkCamera.cpp
     ${SKIA_PATH}/src/utils/SkCanvasStack.cpp
     ${SKIA_PATH}/src/utils/SkCanvasStateUtils.cpp
@@ -794,14 +773,11 @@ set(skia_sources
     ${SKIA_PATH}/src/utils/SkShadowTessellator.cpp
     ${SKIA_PATH}/src/utils/SkShadowUtils.cpp
     ${SKIA_PATH}/src/utils/SkTextUtils.cpp
-
     ${SKIA_PATH}/src/sfnt/SkOTUtils.cpp
     ${SKIA_PATH}/src/sfnt/SkOTTable_name.cpp
-
     ${SKIA_PATH}/src/ports/SkGlobalInitialization_default.cpp
     ${SKIA_PATH}/src/ports/SkMemory_malloc.cpp
     ${SKIA_PATH}/src/ports/SkOSFile_stdio.cpp
-
     ${SKIA_PATH}/src/codec/SkCodec.cpp
     ${SKIA_PATH}/src/codec/SkCodecColorProfile.cpp
     ${SKIA_PATH}/src/codec/SkCodecImageGenerator.cpp
@@ -812,16 +788,13 @@ set(skia_sources
     ${SKIA_PATH}/src/codec/SkImageGenerator_FromEncoded.cpp
     ${SKIA_PATH}/src/codec/SkPixmapUtils.cpp
     ${SKIA_PATH}/src/codec/SkSampler.cpp
-
     ${SKIA_PATH}/modules/skcms/skcms.cc
     ${SKIA_PATH}/modules/skcms/src/skcms_TransformBaseline.cc
-
     ${SKIA_PATH}/modules/skshaper/src/SkShaper.cpp
     ${SKIA_PATH}/modules/skshaper/src/SkShaper_factory.cpp
     ${SKIA_PATH}/modules/skshaper/src/SkShaper_harfbuzz.cpp
     ${SKIA_PATH}/modules/skshaper/src/SkShaper_primitive.cpp
     ${SKIA_PATH}/modules/skshaper/src/SkShaper_skunicode.cpp
-
     ${SKIA_PATH}/modules/skparagraph/src/Decorations.cpp
     ${SKIA_PATH}/modules/skparagraph/src/FontArguments.cpp
     ${SKIA_PATH}/modules/skparagraph/src/FontCollection.cpp
@@ -839,8 +812,9 @@ set(skia_sources
     ${SKIA_PATH}/modules/skparagraph/src/TypefaceFontProvider.cpp
 )
 
-if (WIN32)
-    list(APPEND skia_sources
+if(WIN32)
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/gpu/ganesh/gl/win/GrGLMakeNativeInterface_win.cpp
         ${SKIA_PATH}/src/gpu/ganesh/gl/win/GrGLMakeWinInterface.cpp
         ${SKIA_PATH}/src/ports/SkFontHost_win.cpp
@@ -859,7 +833,8 @@ if (WIN32)
         ${SKIA_PATH}/tools/ganesh/gl/win/SkWGL_win.cpp
     )
 else()
-    list(APPEND skia_sources
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/ports/SkFontHost_FreeType.cpp
         ${SKIA_PATH}/src/ports/SkFontHost_FreeType_common.cpp
         ${SKIA_PATH}/src/ports/SkFontMgr_custom.cpp
@@ -868,14 +843,16 @@ else()
 endif()
 
 if(UNIX AND NOT MINGW)
-    list(APPEND skia_sources
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/ports/SkLog_stdio.cpp
         ${SKIA_PATH}/src/ports/SkOSFile_posix.cpp
     )
 endif()
 
-if (APPLE)
-    list(APPEND skia_sources
+if(APPLE)
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/gpu/ganesh/gl/mac/GrGLMakeNativeInterface_mac.cpp
         ${SKIA_PATH}/src/ports/SkFontMgr_mac_ct.cpp
         ${SKIA_PATH}/src/ports/SkScalerContext_mac_ct.cpp
@@ -888,7 +865,8 @@ if (APPLE)
 endif()
 
 if(LINUX)
-    list(APPEND skia_sources
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/gpu/ganesh/gl/egl/GrGLMakeEGLInterface.cpp
         ${SKIA_PATH}/src/gpu/ganesh/gl/egl/GrGLMakeNativeInterface_egl.cpp
         ${SKIA_PATH}/src/ports/SkFontConfigInterface.cpp
@@ -900,19 +878,26 @@ if(LINUX)
     )
 endif()
 
-if (EMSCRIPTEN)
-    list(APPEND skia_sources
+if(EMSCRIPTEN)
+    list(
+        APPEND skia_sources
         ${SKIA_PATH}/src/gpu/ganesh/gl/GrGLAssembleWebGLInterfaceAutogen.cpp
         ${SKIA_PATH}/src/gpu/ganesh/gl/webgl/GrGLMakeNativeInterface_webgl.cpp
     )
 endif()
 
-file(GLOB_RECURSE skia_headers
+file(
+    GLOB_RECURSE skia_headers
     ${SKIA_PATH}/src/*.h
     ${SKIA_PATH}/include/*.h
 )
 
-add_library(skia STATIC ${skia_sources} ${skia_headers})
+add_library(
+    skia
+    STATIC
+    ${skia_sources}
+    ${skia_headers}
+)
 
 target_include_directories(skia SYSTEM PUBLIC ${SKIA_PATH}/)
 
@@ -934,33 +919,53 @@ if(NOT EMSCRIPTEN)
 
     FetchContent_Declare(
         harfbuzz
-        URL https://github.com/harfbuzz/harfbuzz/releases/download/14.6.0/harfbuzz-14.6.0.tar.xz
+        URL
+            https://github.com/harfbuzz/harfbuzz/releases/download/14.6.0/harfbuzz-14.6.0.tar.xz
         URL_HASH SHA256=d07a007327277708a2a73ae437887cdbaf282937f6d03ca5467723e9099af586
     )
     FetchContent_MakeAvailable(harfbuzz)
 
     FetchContent_Declare(
         freetype
-        URL https://github.com/freetype/freetype/archive/refs/tags/VER-2-14-3.tar.gz
+        URL
+            https://github.com/freetype/freetype/archive/refs/tags/VER-2-14-3.tar.gz
         URL_HASH SHA256=dc49de6b01a266eef4876a4dd34d9842c475d3e28ff2eff63bd2fb760ab56261
     )
     FetchContent_MakeAvailable(freetype)
 
-    target_link_libraries(skia PUBLIC freetype harfbuzz)
+    target_link_libraries(
+        skia
+        PUBLIC
+            freetype
+            harfbuzz
+    )
 else()
-    target_compile_options(skia PRIVATE --use-port=zlib --use-port=harfbuzz --use-port=freetype)
-    target_link_libraries(skia PRIVATE z harfbuzz freetype)
+    target_compile_options(
+        skia
+        PRIVATE
+            --use-port=zlib
+            --use-port=harfbuzz
+            --use-port=freetype
+    )
+    target_link_libraries(
+        skia
+        PRIVATE
+            z
+            harfbuzz
+            freetype
+    )
 endif()
 
-if (WIN32 AND NOT MSVC)
+if(WIN32 AND NOT MSVC)
     add_compile_options(-fms-extensions)
 endif()
 
 if(APPLE)
-    target_link_libraries(skia PRIVATE
-        "-framework CoreText"
-        "-framework CoreGraphics"
-        "-framework Foundation"
+    target_link_libraries(
+        skia
+        PRIVATE
+            "-framework CoreText"
+            "-framework CoreGraphics"
+            "-framework Foundation"
     )
 endif()
-

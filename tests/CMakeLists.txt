@@ -5,18 +5,20 @@ add_library(doctest STATIC docTest.cpp)
 
 macro(AddTestFile test_name test_file)
     add_executable(${test_name} ${test_file})
-    target_link_libraries(${test_name} PRIVATE doctest fc::core)
-
-    add_test(
-        NAME ${test_name}
-        COMMAND ${test_name}
+    target_link_libraries(
+        ${test_name}
+        PRIVATE
+            doctest
+            fc::core
     )
+
+    add_test(NAME ${test_name} COMMAND ${test_name})
 endmacro()
 
-AddTestFile(BitStreamTest bitStream.test.cpp)
+addtestfile(BitStreamTest bitStream.test.cpp)
 
-AddTestFile(GridTest grid.test.cpp)
+addtestfile(GridTest grid.test.cpp)
 
-AddTestFile(idPoolTest idPool.test.cpp)
+addtestfile(idPoolTest idPool.test.cpp)
 
-AddTestFile(shapeTest shapes.test.cpp)
+addtestfile(shapeTest shapes.test.cpp)

@@ -5,15 +5,18 @@ add_executable(grid_demo main.cpp)
 
 target_link_libraries(
     grid_demo
-    PRIVATE SDL3::SDL3
-    fc::client
+    PRIVATE
+        SDL3::SDL3
+        fc::client
 )
 
 install(TARGETS grid_demo DESTINATION examples)
 
-if (DEFINED EMSCRIPTEN)
+if(DEFINED EMSCRIPTEN)
     set_target_properties(
         grid_demo
-        PROPERTIES LINK_FLAGS ${EXAMPLES_LINK_FLAGS}
+        PROPERTIES
+            LINK_FLAGS
+                ${EXAMPLES_LINK_FLAGS}
     )
 endif()

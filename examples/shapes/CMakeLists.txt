@@ -5,15 +5,18 @@ add_executable(shapes main.cpp)
 
 target_link_libraries(
     shapes
-    PRIVATE SDL3::SDL3
-    fc::client
+    PRIVATE
+        SDL3::SDL3
+        fc::client
 )
 
 install(TARGETS shapes DESTINATION examples)
 
-if (DEFINED EMSCRIPTEN)
+if(DEFINED EMSCRIPTEN)
     set_target_properties(
         shapes
-        PROPERTIES LINK_FLAGS ${EXAMPLES_LINK_FLAGS}
+        PROPERTIES
+            LINK_FLAGS
+                ${EXAMPLES_LINK_FLAGS}
     )
 endif()
