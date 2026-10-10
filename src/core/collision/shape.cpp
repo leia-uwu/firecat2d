@@ -28,13 +28,13 @@ private:
     {
         m_fns[typeA][typeB] = {
             .fn = fn,
-            .reverse = false
+            .reverse = false,
         };
 
         if (typeA != typeB) {
             m_fns[typeB][typeA] = {
                 .fn = fn,
-                .reverse = true
+                .reverse = true,
             };
         }
     };
@@ -395,7 +395,7 @@ std::string Polygon::toString() const
             out += ", ";
         }
     }
-    out += "]";
+    out += ']';
 
     return out;
 }
@@ -442,7 +442,7 @@ void Polygon::calculateNormals()
 
 [[nodiscard]] bool Polygon::isConvex(const std::vector<Vec2F>& points)
 {
-    size_t len = points.size();
+    int len = points.size();
 
     int8_t lastCross = 0;
     for (

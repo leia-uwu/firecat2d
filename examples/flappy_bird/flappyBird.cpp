@@ -271,7 +271,7 @@ private:
         TITLE_SCREEN,
         PLAYING,
         PAUSED,
-        DEAD
+        DEAD,
     };
 
     State m_state = State::TITLE_SCREEN;
