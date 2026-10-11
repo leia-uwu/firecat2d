@@ -13,6 +13,7 @@
 
 #include <include/core/SkFontMgr.h>
 #include <include/core/SkTypeface.h>
+#include <modules/skparagraph/include/FontCollection.h>
 
 #include "fc/client/render/texture.h"
 #include "fc/client/render/typeFace.h"
@@ -38,6 +39,10 @@ public:
     {
         return m_fontManager;
     }
+    sk_sp<skia::textlayout::FontCollection> fontCollection()
+    {
+        return m_fontCollection;
+    }
 
 private:
     Resources();
@@ -45,5 +50,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<Texture>> m_textures;
 
     sk_sp<SkFontMgr> m_fontManager;
+    sk_sp<skia::textlayout::FontCollection> m_fontCollection;
     std::unordered_map<std::string, std::unique_ptr<TypeFace>> m_typeFaces;
 };

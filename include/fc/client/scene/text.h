@@ -97,7 +97,7 @@ public:
 
     void render(Renderer::RenderCtx& ctx) override;
 
-private:
+protected:
     TypeFace* m_typeFace;
     SkFont m_font;
 

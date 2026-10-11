@@ -5,15 +5,18 @@ add_executable(spritebenchmark main.cpp)
 
 target_link_libraries(
     spritebenchmark
-    PRIVATE SDL3::SDL3
-    fc::client
+    PRIVATE
+        SDL3::SDL3
+        fc::client
 )
 
 install(TARGETS spritebenchmark DESTINATION examples)
 
-if (DEFINED EMSCRIPTEN)
+if(DEFINED EMSCRIPTEN)
     set_target_properties(
         spritebenchmark
-        PROPERTIES LINK_FLAGS ${EXAMPLES_LINK_FLAGS}
+        PROPERTIES
+            LINK_FLAGS
+                ${EXAMPLES_LINK_FLAGS}
     )
 endif()

@@ -49,11 +49,11 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}},
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{-10, -10}, {10, 10}},
-            .id = 5823
+            .id = 5823,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -75,11 +75,11 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}},
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{-10, -10}, {10, 10}},
-            .id = 5823
+            .id = 5823,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -107,11 +107,11 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}},
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{-10, -10}, {10, 10}},
-            .id = 5823
+            .id = 5823,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -137,15 +137,15 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}}, // (0, 0); (1, 1)
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{20, 20}, {35, 35}}, // (1, 1); (2, 2)
-            .id = 5823
+            .id = 5823,
         };
         Entity entityC{
             .bounds = {{0, 35}, {30, 50}}, // (0, 2); (1, 4)
-            .id = 4082
+            .id = 4082,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -173,15 +173,15 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}}, // (0, 0); (1, 1)
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{20, 20}, {35, 35}}, // (1, 1); (2, 2)
-            .id = 5823
+            .id = 5823,
         };
         Entity entityC{
             .bounds = {{0, 35}, {30, 50}}, // (0, 2); (1, 4)
-            .id = 4082
+            .id = 4082,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -204,15 +204,15 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}}, // (0, 0); (1, 1)
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{20, 20}, {35, 35}}, // (1, 1); (2, 2)
-            .id = 5823
+            .id = 5823,
         };
         Entity entityC{
             .bounds = {{0, 35}, {30, 50}}, // (0, 2); (1, 4)
-            .id = 4082
+            .id = 4082,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);
@@ -240,15 +240,15 @@ TEST_CASE("Grid tests")
     {
         Entity entityA{
             .bounds = {{0, 0}, {20, 20}}, // (0, 0); (1, 1)
-            .id = 9594
+            .id = 9594,
         };
         Entity entityB{
             .bounds = {{20, 20}, {35, 35}}, // (1, 1); (2, 2)
-            .id = 5823
+            .id = 5823,
         };
         Entity entityC{
             .bounds = {{0, 35}, {30, 50}}, // (0, 2); (1, 4)
-            .id = 4082
+            .id = 4082,
         };
 
         grid.insertEntity(entityA.id, entityA.bounds.min, entityA.bounds.max);

@@ -39,7 +39,7 @@ jobs:
 
           sudo apt -y install build-essential git make \
           pkg-config cmake ninja-build sccache lld \
-          libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libsdl3-dev libfontconfig-dev
+          libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libsdl3-dev libfontconfig-dev libicu-dev
 
       - name: Setup sccache
         uses: hendrikmuhs/ccache-action@v1.2.23

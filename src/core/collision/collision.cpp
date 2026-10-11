@@ -220,14 +220,14 @@ bool Collision::RectPolygon(
         rectMin,
         {rectMin.x, rectMax.y},
         rectMax,
-        {rectMax.x, rectMin.y}
+        {rectMax.x, rectMin.y},
     };
 
     static const std::array rectNormals = {
         Vec2F{0, 1},
         Vec2F{-1, 0},
         Vec2F{0, -1},
-        Vec2F{1, 0}
+        Vec2F{1, 0},
     };
 
     Vec2F rectCenter = rectMin + ((rectMax - rectMin) / 2);
