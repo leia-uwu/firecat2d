@@ -30,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew update
-          brew install ccache sdl3 autoconf autoconf-archive automake libtool
+          brew install ccache sdl3 autoconf autoconf-archive automake libtool icu4c
 
       - uses: actions/checkout@v7
 

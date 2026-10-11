@@ -810,6 +810,11 @@ set(skia_sources
     ${SKIA_PATH}/modules/skparagraph/src/TextStyle.cpp
     ${SKIA_PATH}/modules/skparagraph/src/TextWrapper.cpp
     ${SKIA_PATH}/modules/skparagraph/src/TypefaceFontProvider.cpp
+    ${SKIA_PATH}/modules/skunicode/src/SkUnicode.cpp
+    ${SKIA_PATH}/modules/skunicode/src/SkUnicode_icu.cpp
+    ${SKIA_PATH}/modules/skunicode/src/SkUnicode_icu_bidi.cpp
+    ${SKIA_PATH}/modules/skunicode/src/SkUnicode_icu_builtin.cpp
+    ${SKIA_PATH}/modules/skunicode/src/SkBidiFactory_icu_full.cpp
 )
 
 if(WIN32)
@@ -935,10 +940,11 @@ if(NOT EMSCRIPTEN)
 
     target_link_libraries(
         skia
-        PUBLIC
+        PRIVATE
             freetype
             harfbuzz
     )
+
 else()
     target_compile_options(
         skia
@@ -946,6 +952,7 @@ else()
             --use-port=zlib
             --use-port=harfbuzz
             --use-port=freetype
+            --use-port=icu
     )
     target_link_libraries(
         skia
@@ -953,6 +960,51 @@ else()
             z
             harfbuzz
             freetype
+    )
+endif()
+
+if(NOT WIN32 AND NOT EMSCRIPTEN)
+    find_package(
+        ICU
+        COMPONENTS
+            uc
+            io
+    )
+    target_link_libraries(skia PRIVATE ICU::io)
+endif()
+
+if(WIN32)
+    # i don't care about windows on ARM and its 2 users, and will never care about 32 bits :)
+    FetchContent_Declare(
+        icu-win64
+        URL
+            https://github.com/unicode-org/icu/releases/download/release-78.3/icu4c-78.3-Win64-MSVC2022.zip
+        URL_HASH SHA256=446b671f9437227daa79e221d4521d75793f9ecd65ac44c06e34dd848f201ac2
+    )
+    FetchContent_MakeAvailable(icu-win64)
+    add_library(icu_uc STATIC IMPORTED)
+    set_property(
+        TARGET
+            icu_uc
+        PROPERTY
+            IMPORTED_LOCATION
+                ${icu-win64_SOURCE_DIR}/lib64/icuuc.lib
+    )
+    add_library(icu_io STATIC IMPORTED)
+    set_property(
+        TARGET
+            icu_io
+        PROPERTY
+            IMPORTED_LOCATION
+                ${icu-win64_SOURCE_DIR}/lib64/icuio.lib
+    )
+    target_include_directories(skia PUBLIC ${icu-win64_SOURCE_DIR}/include)
+
+    target_link_libraries(
+        skia
+        PRIVATE
+            icu_uc
+            icu_io
     )
 endif()
 
